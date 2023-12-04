@@ -25,11 +25,13 @@ while start:
     input(f"!!!{player.my_money}!!! JAZDA! ZACZYNAMY!   [WCIŚNIJ ENTER]")
     player.chip_hand()
     player.show_my_chips()
+    # TODO, listy, pętle itp. zaczynamy od zero
     turn = 1
     all_in = "n"
 
     while True:
         decision = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n")
+        # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków
         while decision not in ("t", "T", "n", "N"):
             decision = input("Wpisz  (T/N)\n")
         if decision == "N" or decision == "n":
@@ -54,9 +56,12 @@ while start:
 
         pb = player.bet_money()
         test = player.checker(pb)
+
+      # TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
         while test == "t" or test == "T" or test == "n" or test == "N":
             while test == "n" or test == "N":
                 input("W takim razie obstaw inną kwotę!   [WCIŚNIJ ENTER]")
+                # TODO, muszisz (dla samego siebie) starać się jak najlepiej nazywać zmienne
                 pb = player.bet_money()
                 test = player.checker(pb)
             if test == "t" or test == "T":
@@ -111,9 +116,13 @@ while start:
                 count = 0
                 for card in player_cards:
                     count += 1
+                    # TODO, logika kart do dictionary albo podobnego typu
+
+
                     if card.figura == "As":
                         if count != len(player_cards):
                             ace_changer = "x"
+                            # TODO, Powtarzalny kod powinien zostać wyniesiony do osobnej encji lub serwisu
                             while ace_changer not in ("t", "T", "n", "N"):
                                 ace_changer = input(
                                     f"Czy chcesz zmienić wartość swojego {card.__str__()}?({card.wartość}) (T/N)\n")
@@ -143,6 +152,8 @@ while start:
                 print(f"Moje środki to: {player.my_money}zł\n")
                 if player.my_money == 0:
                     still = "X"
+                    # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it)
+                    # TODO, na przykład plik ValidationService, który będzie zawierał metodę yes_no_answer
                     while still not in ("n", "N", "t", "T"):
                         still = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)")
                         if still == "n" or still == "N":
@@ -168,6 +179,8 @@ while start:
                 player_decision = 0
                 print("\n" * 2)
                 print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
+                # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance
+                # Big O notation (google it)
                 while player_decision not in ['1', '2']:
                     player_decision = input("1 - Pas \n2 - Dobieram \n")
                     if player_decision not in ['1', '2']:

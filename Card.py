@@ -2,6 +2,8 @@ import Global
 
 class Card:
 
+    specific_bhevaior_predicate = None
+
     def __init__(self, kolor, figura):
         self.kolor = kolor
         self.figura = figura
@@ -10,7 +12,9 @@ class Card:
     def __str__(self):
         return f"{self.figura} {self.kolor}"
 
+
     def ace(self, card):
+        # TODO, ta logika powinna byc w serwisie do zarządzania kartami, encje slużą do określania kontraktów
         if card.figura == "As":
             if card.wartość == 0:
                 while card.wartość not in ["1", "11"]:
