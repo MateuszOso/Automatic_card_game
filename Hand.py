@@ -107,7 +107,7 @@ class Hand:
                                 all_in = "y"
                                 return all_in
                     if ż == 1 and pb != 1 and pb != 0:
-                        decision = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n")
+                        decision = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
                         return decision
                     break
                 if ż == self.bet_check[count]:
@@ -134,7 +134,7 @@ class Hand:
                         pb -= self.bet_check[count]
                         count += 1
                     elif ż == 1:
-                        decision = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n")
+                        decision = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
                         return decision
                     else:
                         break
