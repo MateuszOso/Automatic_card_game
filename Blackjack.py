@@ -25,8 +25,8 @@ while start:
     input(f"!!!{player.my_money}!!! JAZDA! ZACZYNAMY!   [WCIŚNIJ ENTER]")
     player.chip_hand()
     player.show_my_chips()
-    # TODO, listy, pętle itp. zaczynamy od zero
-    turn = 1
+    # TODO, listy, pętle itp. zaczynamy od zero - DONE
+    turn = 0
     all_in = "n"
 
     while True:
@@ -47,7 +47,7 @@ while start:
 
     while game_on:
 
-        if turn != 1:
+        if turn != 0:
             deck = Deck()
             deck.shuffle()
             player_cards = []
@@ -76,14 +76,14 @@ while start:
         input("KRUPIER LOSUJE KARTY!   [WCIŚNIJ ENTER]")
         print("\n" * 20)
 
-        round_no = 1
-        croupier_round = 1
+        round_no = 0
+        croupier_round = 0
         player_sum = 0
         croupier_sum = 0
         next_round = True
         while next_round:
 
-            if round_no == 1:
+            if round_no == 0:
                 for x in range(2):
                     card = deck.take_one()
                     player_cards.append(card)
@@ -92,7 +92,7 @@ while start:
                 print("Moje karty to:")
                 player.show_cards(player_cards)
 
-            if round_no == 1:
+            if round_no == 0:
                 for x in range(2):
                     card = deck.take_one()
                     croupier_cards.append(card)
@@ -103,7 +103,7 @@ while start:
                 print(f"{croupier_cards[0]}")
                 print("Druga karta krupiera jest zakryta.")
 
-            if round_no == 1:
+            if round_no == 0:
                 for card in player_cards:
                     if card.figura == "As":
                         card.wartość = deck.ace(card)
@@ -136,7 +136,7 @@ while start:
                                 if ace_changer == "N" or ace_changer == "n":
                                     print(f"Okej, wartoś Asa nadal wynosi {card.wartość}.")
 
-            if round_no == 1 and player_sum == 21:
+            if round_no == 0 and player_sum == 21:
                 print("\n   BLACKJACK!")
                 player.blackjack(bet_chips_list, pb)
                 player.show_my_chips()
@@ -211,7 +211,7 @@ while start:
 
                 while player_decision == "1":
                     croupier_round += 1
-                    if croupier_round == 2:
+                    if croupier_round == 1:
                         ace_checker = 0
                         print("\nKrupier odsłania swoją drugą kartę.\n")
                         print("Moje karty to:")
