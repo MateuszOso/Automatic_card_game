@@ -31,7 +31,7 @@ while start:
 
     while True:
         decision = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n").lower()
-        # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków
+        # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków - DONE
         while decision not in ("t", "n"):
             decision = input("Wpisz  (T/N)\n").lower()
         if decision == "n":
