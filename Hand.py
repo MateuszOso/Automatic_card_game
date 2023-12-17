@@ -15,8 +15,7 @@ class Hand:
             try:
                 self.money = int(input("Ile pieniędzy wpłacasz?(Max 10000)\n"))
                 if self.money in range(1,10001):
-                    self.my_money = int(self.money)
-                    return self.my_money
+                    return self.money
                 else:
                     print("Wpisz kwotę od 1 - 10000")
             except ValueError:
@@ -24,7 +23,7 @@ class Hand:
 
 
     def chip_hand(self):
-        self.technic = self.my_money
+        self.technic = self.money
         for ż in Global.żetony:
             while self.technic - ż >= 0:
                 chip = Chip(ż)
@@ -83,7 +82,7 @@ class Hand:
 
             try:
                 player_bet = int(input("Jaką kwotę obstawiasz?\n"))
-                if player_bet > self.my_money:
+                if player_bet > self.money:
                     print("Brak wystarczających funduszy.")
                 else:
                     return player_bet
@@ -105,7 +104,7 @@ class Hand:
                     if player_bet == self.bet_check[-1]:
                         if player_bet - ż == 0:
                             player_bet -= ż
-                            if org_player_bet == self.my_money:
+                            if org_player_bet == self.money:
                                 all_in = "y"
                                 return all_in
                     if ż == 1 and player_bet != 1 and player_bet != 0:
@@ -145,7 +144,7 @@ class Hand:
 
         count = 0
         bet_chips_list = []
-        self.my_money -= player_bet
+        self.money -= player_bet
 
         for ż in Global.żetony:
             while player_bet >= ż:
@@ -166,21 +165,21 @@ class Hand:
 
     def win_bet(self, amount, player_bet):
 
-        self.my_money += 2 * player_bet
+        self.money += 2 * player_bet
         self.all_chips_list.extend(2 * amount)
 
         return self.all_chips_list.sort(reverse=True)
 
     def draw(self, amount, player_bet):
 
-        self.my_money += player_bet
+        self.money += player_bet
         self.all_chips_list.extend(amount)
 
         return self.all_chips_list.sort(reverse=True)
 
     def blackjack(self, amount, player_bet):
 
-        self.my_money += 3 * player_bet
+        self.money += 3 * player_bet
         self.all_chips_list.extend(3 * amount)
 
         return self.all_chips_list.sort(reverse=True)
