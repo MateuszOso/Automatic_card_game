@@ -15,8 +15,7 @@ class Hand:
             try:
                 self.money = int(input("Ile pieniędzy wpłacasz?(Max 10000)\n"))
                 if self.money in range(1,10001):
-                    self.my_money = int(self.money)
-                    return self.my_money
+                    return self.money
                 else:
                     print("Wpisz kwotę od 1 - 10000")
             except ValueError:
@@ -24,19 +23,19 @@ class Hand:
 
 
     def chip_hand(self):
-        self.technic = self.my_money
-        for ż in Global.żetony:
-            while self.technic - ż >= 0:
-                chip = Chip(ż)
+        self.technic = self.money
+        for token in Global.żetony:
+            while self.technic - token >= 0:
+                chip = Chip(token)
                 self.all_chips.append(chip)
-                self.all_chips_list.append(ż)
-                self.technic -= ż
+                self.all_chips_list.append(token)
+                self.technic -= token
 
         return self.all_chips and self.all_chips_list
 
-    def exchange_choice(self, decision):
+    def exchange_choice(self, decision_t_n):
 
-        while decision == "T" or decision == "t":
+        while decision_t_n == "t":
             żeton1 = input("Wpisz który żeton chcesz rozmienić.\n")
             while żeton1 not in [str(x) for x in self.all_chips_list]:
                 żeton1 = input("Nie masz takiego żetonu! Wpisz jeszcze raz:\n")
@@ -56,15 +55,15 @@ class Hand:
 
     def exchange(self, żeton1, żeton2):
         new_chips_list = []
-        for obj in self.all_chips_list:
-            if żeton1 == obj:
-                self.all_chips_list.remove(obj)
+        for object in self.all_chips_list:
+            if żeton1 == object:
+                self.all_chips_list.remove(object)
                 while żeton1 > 0:
                     if żeton2 > żeton1:
-                        for ż in Global.żetony:
-                            while ż <= żeton1 and (żeton1 - ż) >= 0:
-                                żeton1 -= ż
-                                new_chips_list.append(ż)
+                        for token in Global.żetony:
+                            while token <= żeton1 and (żeton1 - token) >= 0:
+                                żeton1 -= token
+                                new_chips_list.append(token)
                     else:
                         new_chips_list.append(żeton2)
                         żeton1 -= żeton2
@@ -78,107 +77,109 @@ class Hand:
     def bet_money(self):
 
         self.bet_check = self.all_chips_list
-        player_bet = input("Jaką kwotę obstawiasz?\n")
 
-        while not player_bet.isdigit():
-            player_bet = input("Podaj kwotę przez wpisanie cyfr\n")
+        while True:
 
-        pb = int(player_bet)
-        while pb > self.my_money:
-            pb = int(input("Brak wystarczających funduszy. Podaj mniejszą kwotę\n"))
+            try:
+                player_bet = int(input("Jaką kwotę obstawiasz?\n"))
+                if player_bet > self.money:
+                    print("Brak wystarczających funduszy.")
+                else:
+                    return player_bet
+            except ValueError:
+                print("Podaj wartość cyfrą")
 
-        return pb
 
-    def checker(self, pb):
+    def checker(self, player_bet):
 
-        org_pb = pb
+        org_player_bet = player_bet
         count = 0
-        for ż in Global.żetony:
+        for token in Global.żetony:
             total = 0
             next = "n"
-            while ż <= pb and next == "n":
-                if pb == 0:
+            while token <= player_bet and next == "n":
+                if player_bet == 0:
                     break
                 if count == (len(self.bet_check) - 1):
-                    if pb == self.bet_check[-1]:
-                        if pb - ż == 0:
-                            pb -= ż
-                            if org_pb == self.my_money:
+                    if player_bet == self.bet_check[-1]:
+                        if player_bet - token == 0:
+                            player_bet -= token
+                            if org_player_bet == self.money:
                                 all_in = "y"
                                 return all_in
-                    if ż == 1 and pb != 1 and pb != 0:
-                        decision = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
-                        return decision
+                    if token == 1 and player_bet != 1 and player_bet != 0:
+                        decision_t_n = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
+                        return decision_t_n
                     break
-                if ż == self.bet_check[count]:
+                if token == self.bet_check[count]:
                     count += 1
-                    pb -= ż
-                elif ż > self.bet_check[count]:
-                    while ż > total:
+                    player_bet -= token
+                elif token > self.bet_check[count]:
+                    while token > total:
                         if count == len(self.bet_check):
                             break
                         total += self.bet_check[count]
                         count += 1
-                    if total > ż and count != len(self.bet_check):
-                        pb -= total
+                    if total > token and count != len(self.bet_check):
+                        player_bet -= total
                         next = "y"
                     elif count != len(self.bet_check):
-                        pb -= ż
+                        player_bet -= token
                         next = "y"
                 else:
-                    while ż < self.bet_check[count]:
+                    while token < self.bet_check[count]:
                         count += 1
                         if count == (len(self.bet_check) - 1):
                             break
-                    if ż >= self.bet_check[count] and count < (len(self.bet_check) - 1):
-                        pb -= self.bet_check[count]
+                    if token >= self.bet_check[count] and count < (len(self.bet_check) - 1):
+                        player_bet -= self.bet_check[count]
                         count += 1
-                    elif ż == 1:
-                        decision = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
-                        return decision
+                    elif token == 1:
+                        decision_t_n = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
+                        return decision_t_n
                     else:
                         break
 
-    def bet(self, pb):
+    def bet(self, player_bet):
 
         count = 0
         bet_chips_list = []
-        self.my_money -= pb
+        self.money -= player_bet
 
-        for ż in Global.żetony:
-            while pb >= ż:
+        for token in Global.żetony:
+            while player_bet >= token:
                 if count == len(self.all_chips_list):
                     count = 0
                     break
-                if self.all_chips_list[count] == ż:
+                if self.all_chips_list[count] == token:
                     bet_chips_list.append(self.all_chips_list.pop(count))
-                    pb -= ż
-                    if self.all_chips_list == [] and self.checker(pb) != "y":
+                    player_bet -= token
+                    if self.all_chips_list == [] and self.checker(player_bet) != "y":
                         print("ALL IN!")
-                elif self.all_chips_list[count] > ż:
+                elif self.all_chips_list[count] > token:
                     count += 1
                 else:
                     count += 1
 
         return bet_chips_list
 
-    def win_bet(self, amount, pb):
+    def win_bet(self, amount, player_bet):
 
-        self.my_money += 2 * pb
+        self.money += 2 * player_bet
         self.all_chips_list.extend(2 * amount)
 
         return self.all_chips_list.sort(reverse=True)
 
-    def draw(self, amount, pb):
+    def draw(self, amount, player_bet):
 
-        self.my_money += pb
+        self.money += player_bet
         self.all_chips_list.extend(amount)
 
         return self.all_chips_list.sort(reverse=True)
 
-    def blackjack(self, amount, pb):
+    def blackjack(self, amount, player_bet):
 
-        self.my_money += 3 * pb
+        self.money += 3 * player_bet
         self.all_chips_list.extend(3 * amount)
 
         return self.all_chips_list.sort(reverse=True)

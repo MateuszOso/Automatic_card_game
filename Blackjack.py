@@ -16,13 +16,13 @@ while start:
     player = Hand(name)
     print(f"WITAJ W BLACKJACK {player.name}!")
 
-    c = Croupier()
+    croupier = Croupier()
     deck = Deck()
     deck.shuffle()
     player_cards = []
     croupier_cards = []
     player.amount_money()
-    input(f"!!!{player.my_money}!!! JAZDA! ZACZYNAMY!   [WCIŚNIJ ENTER]")
+    input(f"!!!{player.money}!!! JAZDA! ZACZYNAMY!   [WCIŚNIJ ENTER]")
     player.chip_hand()
     player.show_my_chips()
     # TODO, listy, pętle itp. zaczynamy od zero - DONE
@@ -30,13 +30,21 @@ while start:
     all_in = "n"
 
     while True:
+<<<<<<< HEAD
         decision = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n").lower()
         # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków - DONE
         while decision not in ("t", "n"):
             decision = input("Wpisz  (T/N)\n").lower()
         if decision == "n":
+=======
+        decision_t_n = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n").lower()
+        # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków - DONE
+        while decision_t_n not in ("t", "n"):
+            decision_t_n = input("Wpisz  (T/N)\n").lower()
+        if decision_t_n == "n":
+>>>>>>> Better_names
             break
-        [żeton1, żeton2] = player.exchange_choice(decision)
+        [żeton1, żeton2] = player.exchange_choice(decision_t_n)
         player.exchange(int(żeton1), int(żeton2))
         input("GOTOWE!   [WCIŚNIJ ENTER]")
         player.show_my_chips()
@@ -54,25 +62,25 @@ while start:
             croupier_cards = []
             all_in = "n"
 
-        pb = player.bet_money()
-        test = player.checker(pb)
+        player_bet = player.bet_money()
+        bet_acceptance = player.checker(player_bet)
 
-      # TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
-        while test == "t" or test == "n":
-            while test == "n":
+      #TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
+        while bet_acceptance == "t" or bet_acceptance == "n":
+            while bet_acceptance == "n":
                 input("W takim razie obstaw inną kwotę!   [WCIŚNIJ ENTER]")
-                # TODO, muszisz (dla samego siebie) starać się jak najlepiej nazywać zmienne
-                pb = player.bet_money()
-                test = player.checker(pb)
-            if test == "t":
-                exchange = player.exchange_choice(test)
+                # TODO, muszisz (dla samego siebie) starać się jak najlepiej nazywać zmienne - DONE
+                player_bet = player.bet_money()
+                bet_acceptance = player.checker(player_bet)
+            if bet_acceptance == "t":
+                exchange = player.exchange_choice(bet_acceptance)
                 player.exchange(exchange[0], exchange[1])
                 input("GOTOWE!   [WCIŚNIJ ENTER]")
                 player.show_my_chips()
-                test = player.checker(pb)
+                bet_acceptance = player.checker(player_bet)
 
-        bet_chips_list = player.bet(pb)
-        input(f"KWOTA OBSTAWIONA!. POZOSTAŁO CI {player.my_money} zł.   [WCIŚNIJ ENTER]")
+        bet_chips_list = player.bet(player_bet)
+        input(f"KWOTA OBSTAWIONA!. POZOSTAŁO CI {player.money} zł.   [WCIŚNIJ ENTER]")
         input("KRUPIER LOSUJE KARTY!   [WCIŚNIJ ENTER]")
         print("\n" * 20)
 
@@ -109,7 +117,7 @@ while start:
                         card.wartość = deck.ace(card)
                         player_sum += card.wartość
             else:
-                card = player_cards[round_no]
+                card = player_cards[round_no + 1]
                 if card.figura == "As":
                     card.wartość = deck.ace(card)
                     player_sum += card.wartość
@@ -137,9 +145,9 @@ while start:
 
             if round_no == 0 and player_sum == 21:
                 print("\n   BLACKJACK!")
-                player.blackjack(bet_chips_list, pb)
+                player.blackjack(bet_chips_list, player_bet)
                 player.show_my_chips()
-                print(f"Moje środki to: {player.my_money}zł\n")
+                print(f"Moje środki to: {player.money}zł\n")
                 next_round = False
                 turn += 1
                 break
@@ -148,20 +156,20 @@ while start:
                 print("\n")
                 print("PRZEGRANA! SUMA KART WIĘKSZA NIŻ 21! TRACISZ ŻETONY!")
                 player.show_my_chips()
-                print(f"Moje środki to: {player.my_money}zł\n")
-                if player.my_money == 0:
-                    still = "X"
+                print(f"Moje środki to: {player.money}zł\n")
+                if player.money == 0:
+                    continued = "X"
                     # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it)
                     # TODO, na przykład plik ValidationService, który będzie zawierał metodę yes_no_answer
-                    while still not in ("n", "t"):
-                        still = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                        if still == "n":
+                    while continued not in ("n", "t"):
+                        continued = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
+                        if continued == "n":
                             print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
                             game_on = False
                             start = False
                             next_round = False
                             break
-                        if still == "t":
+                        if continued == "t":
                             print("\n" * 20)
                             game_on = False
                             next_round = False
@@ -200,9 +208,9 @@ while start:
                     print("Druga karta krupiera jest zakryta.")
                     if player_sum == 21:
                         print("\nSUMA TWOICH KART TO 21! WYGRANA!")
-                        player.win_bet(bet_chips_list, pb)
+                        player.win_bet(bet_chips_list, player_bet)
                         player.show_my_chips()
-                        print(f"Moje środki to: {player.my_money}zł\n")
+                        print(f"Moje środki to: {player.money}zł\n")
                         next_round = False
                         player_decision = "0"
                         turn += 1
@@ -217,7 +225,7 @@ while start:
                         player.show_cards(player_cards)
                         print("\n" * 2)
                         print("Karty krupiera to:")
-                        c.show_cards(croupier_cards)
+                        croupier.show_cards(croupier_cards)
 
                         for card in croupier_cards:
                             if card.figura == "As" and ace_checker == 0:
@@ -232,20 +240,20 @@ while start:
                         if croupier_sum == 21:
                             print("\nPRZEGRANA! SUMA KART KRUPIERA TO 21!")
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.my_money}zł\n")
+                            print(f"Moje środki to: {player.money}zł\n")
 
-                            if player.my_money == 0:
-                                still = "X"
-                                while still not in ("n", "t"):
-                                    still = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                                    if still == "n":
+                            if player.money == 0:
+                                continued = "X"
+                                while continued not in ("n", "t"):
+                                    continued = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
+                                    if continued == "n":
                                         print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
                                         game_on = False
                                         start = False
                                         player_decision = "0"
                                         next_round = False
                                         break
-                                    if still == "t":
+                                    if continued == "t":
                                         print("\n" * 20)
                                         game_on = False
                                         player_decision = "0"
@@ -260,7 +268,7 @@ while start:
                     else:
                         croupier_count = 2
                         while croupier_sum < 17:
-                            helper = 0
+                            croupier_compare = 0
                             card = deck.take_one()
                             croupier_cards.append(card)
                             if card.figura == "As":
@@ -270,16 +278,16 @@ while start:
                                 if croupier_sum > 21 and card.wartość == 11:
                                     card.wartość = 1
                                     croupier_sum -= 10
-                                if croupier_count == helper:
+                                if croupier_count == croupier_compare:
                                     print(card)
                                 else:
-                                    helper += 1
+                                    croupier_compare += 1
                             croupier_count += 1
                         if croupier_sum > 21:
                             print("\nSUMA KART KRUPIERA WYŻSZA NIŻ 21! WYGRANA")
-                            player.win_bet(bet_chips_list, pb)
+                            player.win_bet(bet_chips_list, player_bet)
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.my_money}zł\n")
+                            print(f"Moje środki to: {player.money}zł\n")
                             next_round = False
                             player_decision = "0"
                             turn += 1
@@ -287,20 +295,20 @@ while start:
                         if croupier_sum == 21:
                             print("\nPRZEGRANA! SUMA KART KRUPIERA TO 21!")
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.my_money}zł\n")
-                            if player.my_money == 0:
-                                still = "X"
-                                while still not in ("n", "t"):
-                                    still = input(
+                            print(f"Moje środki to: {player.money}zł\n")
+                            if player.money == 0:
+                                continued = "X"
+                                while continued not in ("n", "t"):
+                                    continued = input(
                                         "KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                                    if still == "n":
+                                    if continued == "n":
                                         print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
                                         game_on = False
                                         start = False
                                         player_decision = "0"
                                         next_round = False
                                         break
-                                    if still == "t":
+                                    if continued == "t":
                                         print("\n" * 20)
                                         game_on = False
                                         player_decision = "0"
@@ -316,20 +324,20 @@ while start:
                         if croupier_sum < 21 and player_sum < croupier_sum:
                             print("\nPRZEGRANA! SUMA KART KRUPIERA WYŻSZA OD TWOJEJ!")
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.my_money}zł\n")
-                            if player.my_money == 0:
-                                still = "X"
-                                while still not in ("n", "t"):
-                                    still = input(
+                            print(f"Moje środki to: {player.money}zł\n")
+                            if player.money == 0:
+                                continued = "X"
+                                while continued not in ("n", "t"):
+                                    continued = input(
                                         "KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                                    if still == "n":
+                                    if continued == "n":
                                         print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
                                         game_on = False
                                         start = False
                                         player_decision = "0"
                                         next_round = False
                                         break
-                                    if still == "t":
+                                    if continued == "t":
                                         print("\n" * 20)
                                         game_on = False
                                         player_decision = "0"
@@ -345,9 +353,9 @@ while start:
 
                         if croupier_sum < 21 and player_sum > croupier_sum:
                             print("\nSUMA KART GRACZA WYŻSZA NIŻ KRUPIERA! WYGRANA")
-                            player.win_bet(bet_chips_list, pb)
+                            player.win_bet(bet_chips_list, player_bet)
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.my_money}zł\n")
+                            print(f"Moje środki to: {player.money}zł\n")
                             next_round = False
                             player_decision = "0"
                             turn += 1
@@ -355,9 +363,9 @@ while start:
 
                         if croupier_sum < 21 and player_sum == croupier_sum:
                             print("\nREMIS! OBSTAWIONA KWOTA WRACA DO CIEBIE!")
-                            player.draw(bet_chips_list, pb)
+                            player.draw(bet_chips_list, player_bet)
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.my_money}zł\n")
+                            print(f"Moje środki to: {player.money}zł\n")
                             next_round = False
                             player_decision = "0"
                             turn += 1
