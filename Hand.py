@@ -86,36 +86,35 @@ class Hand:
                 if player_bet > self.my_money:
                     print("Brak wystarczających funduszy.")
                 else:
-                    pb = int(player_bet)
-                    return pb
+                    return player_bet
             except ValueError:
                 print("Podaj wartość cyfrą")
 
 
-    def checker(self, pb):
+    def checker(self, player_bet):
 
-        org_pb = pb
+        org_player_bet = player_bet
         count = 0
         for ż in Global.żetony:
             total = 0
             next = "n"
-            while ż <= pb and next == "n":
-                if pb == 0:
+            while ż <= player_bet and next == "n":
+                if player_bet == 0:
                     break
                 if count == (len(self.bet_check) - 1):
-                    if pb == self.bet_check[-1]:
-                        if pb - ż == 0:
-                            pb -= ż
-                            if org_pb == self.my_money:
+                    if player_bet == self.bet_check[-1]:
+                        if player_bet - ż == 0:
+                            player_bet -= ż
+                            if org_player_bet == self.my_money:
                                 all_in = "y"
                                 return all_in
-                    if ż == 1 and pb != 1 and pb != 0:
+                    if ż == 1 and player_bet != 1 and player_bet != 0:
                         decision_t_n = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
                         return decision_t_n
                     break
                 if ż == self.bet_check[count]:
                     count += 1
-                    pb -= ż
+                    player_bet -= ż
                 elif ż > self.bet_check[count]:
                     while ż > total:
                         if count == len(self.bet_check):
@@ -123,10 +122,10 @@ class Hand:
                         total += self.bet_check[count]
                         count += 1
                     if total > ż and count != len(self.bet_check):
-                        pb -= total
+                        player_bet -= total
                         next = "y"
                     elif count != len(self.bet_check):
-                        pb -= ż
+                        player_bet -= ż
                         next = "y"
                 else:
                     while ż < self.bet_check[count]:
@@ -134,7 +133,7 @@ class Hand:
                         if count == (len(self.bet_check) - 1):
                             break
                     if ż >= self.bet_check[count] and count < (len(self.bet_check) - 1):
-                        pb -= self.bet_check[count]
+                        player_bet -= self.bet_check[count]
                         count += 1
                     elif ż == 1:
                         decision_t_n = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
@@ -142,21 +141,21 @@ class Hand:
                     else:
                         break
 
-    def bet(self, pb):
+    def bet(self, player_bet):
 
         count = 0
         bet_chips_list = []
-        self.my_money -= pb
+        self.my_money -= player_bet
 
         for ż in Global.żetony:
-            while pb >= ż:
+            while player_bet >= ż:
                 if count == len(self.all_chips_list):
                     count = 0
                     break
                 if self.all_chips_list[count] == ż:
                     bet_chips_list.append(self.all_chips_list.pop(count))
-                    pb -= ż
-                    if self.all_chips_list == [] and self.checker(pb) != "y":
+                    player_bet -= ż
+                    if self.all_chips_list == [] and self.checker(player_bet) != "y":
                         print("ALL IN!")
                 elif self.all_chips_list[count] > ż:
                     count += 1
@@ -165,23 +164,23 @@ class Hand:
 
         return bet_chips_list
 
-    def win_bet(self, amount, pb):
+    def win_bet(self, amount, player_bet):
 
-        self.my_money += 2 * pb
+        self.my_money += 2 * player_bet
         self.all_chips_list.extend(2 * amount)
 
         return self.all_chips_list.sort(reverse=True)
 
-    def draw(self, amount, pb):
+    def draw(self, amount, player_bet):
 
-        self.my_money += pb
+        self.my_money += player_bet
         self.all_chips_list.extend(amount)
 
         return self.all_chips_list.sort(reverse=True)
 
-    def blackjack(self, amount, pb):
+    def blackjack(self, amount, player_bet):
 
-        self.my_money += 3 * pb
+        self.my_money += 3 * player_bet
         self.all_chips_list.extend(3 * amount)
 
         return self.all_chips_list.sort(reverse=True)
