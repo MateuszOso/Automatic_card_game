@@ -30,19 +30,12 @@ while start:
     all_in = "n"
 
     while True:
-<<<<<<< HEAD
-        decision = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n").lower()
-        # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków - DONE
-        while decision not in ("t", "n"):
-            decision = input("Wpisz  (T/N)\n").lower()
-        if decision == "n":
-=======
+
         decision_t_n = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n").lower()
         # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków - DONE
         while decision_t_n not in ("t", "n"):
             decision_t_n = input("Wpisz  (T/N)\n").lower()
         if decision_t_n == "n":
->>>>>>> Better_names
             break
         [żeton1, żeton2] = player.exchange_choice(decision_t_n)
         player.exchange(int(żeton1), int(żeton2))
