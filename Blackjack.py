@@ -31,7 +31,7 @@ while start:
 
     while True:
         decision_t_n = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n").lower()
-        # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków
+        # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków - DONE
         while decision_t_n not in ("t", "n"):
             decision_t_n = input("Wpisz  (T/N)\n").lower()
         if decision_t_n == "n":
@@ -55,21 +55,21 @@ while start:
             all_in = "n"
 
         player_bet = player.bet_money()
-        test = player.checker(player_bet)
+        bet_acceptance = player.checker(player_bet)
 
       # TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
-        while test == "t" or test == "n":
-            while test == "n":
+        while bet_acceptance == "t" or bet_acceptance == "n":
+            while bet_acceptance == "n":
                 input("W takim razie obstaw inną kwotę!   [WCIŚNIJ ENTER]")
                 # TODO, muszisz (dla samego siebie) starać się jak najlepiej nazywać zmienne
                 player_bet = player.bet_money()
-                test = player.checker(player_bet)
-            if test == "t":
-                exchange = player.exchange_choice(test)
+                bet_acceptance = player.checker(player_bet)
+            if bet_acceptance == "t":
+                exchange = player.exchange_choice(bet_acceptance)
                 player.exchange(exchange[0], exchange[1])
                 input("GOTOWE!   [WCIŚNIJ ENTER]")
                 player.show_my_chips()
-                test = player.checker(player_bet)
+                bet_acceptance = player.checker(player_bet)
 
         bet_chips_list = player.bet(player_bet)
         input(f"KWOTA OBSTAWIONA!. POZOSTAŁO CI {player.money} zł.   [WCIŚNIJ ENTER]")
@@ -150,18 +150,18 @@ while start:
                 player.show_my_chips()
                 print(f"Moje środki to: {player.money}zł\n")
                 if player.money == 0:
-                    still = "X"
+                    continued = "X"
                     # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it)
                     # TODO, na przykład plik ValidationService, który będzie zawierał metodę yes_no_answer
-                    while still not in ("n", "t"):
-                        still = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                        if still == "n":
+                    while continued not in ("n", "t"):
+                        continued = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
+                        if continued == "n":
                             print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
                             game_on = False
                             start = False
                             next_round = False
                             break
-                        if still == "t":
+                        if continued == "t":
                             print("\n" * 20)
                             game_on = False
                             next_round = False
@@ -235,17 +235,17 @@ while start:
                             print(f"Moje środki to: {player.money}zł\n")
 
                             if player.money == 0:
-                                still = "X"
-                                while still not in ("n", "t"):
-                                    still = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                                    if still == "n":
+                                continued = "X"
+                                while continued not in ("n", "t"):
+                                    continued = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
+                                    if continued == "n":
                                         print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
                                         game_on = False
                                         start = False
                                         player_decision = "0"
                                         next_round = False
                                         break
-                                    if still == "t":
+                                    if continued == "t":
                                         print("\n" * 20)
                                         game_on = False
                                         player_decision = "0"
@@ -260,7 +260,7 @@ while start:
                     else:
                         croupier_count = 2
                         while croupier_sum < 17:
-                            helper = 0
+                            croupier_compare = 0
                             card = deck.take_one()
                             croupier_cards.append(card)
                             if card.figura == "As":
@@ -270,10 +270,10 @@ while start:
                                 if croupier_sum > 21 and card.wartość == 11:
                                     card.wartość = 1
                                     croupier_sum -= 10
-                                if croupier_count == helper:
+                                if croupier_count == croupier_compare:
                                     print(card)
                                 else:
-                                    helper += 1
+                                    croupier_compare += 1
                             croupier_count += 1
                         if croupier_sum > 21:
                             print("\nSUMA KART KRUPIERA WYŻSZA NIŻ 21! WYGRANA")
@@ -289,18 +289,18 @@ while start:
                             player.show_my_chips()
                             print(f"Moje środki to: {player.money}zł\n")
                             if player.money == 0:
-                                still = "X"
-                                while still not in ("n", "t"):
-                                    still = input(
+                                continued = "X"
+                                while continued not in ("n", "t"):
+                                    continued = input(
                                         "KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                                    if still == "n":
+                                    if continued == "n":
                                         print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
                                         game_on = False
                                         start = False
                                         player_decision = "0"
                                         next_round = False
                                         break
-                                    if still == "t":
+                                    if continued == "t":
                                         print("\n" * 20)
                                         game_on = False
                                         player_decision = "0"
@@ -318,18 +318,18 @@ while start:
                             player.show_my_chips()
                             print(f"Moje środki to: {player.money}zł\n")
                             if player.money == 0:
-                                still = "X"
-                                while still not in ("n", "t"):
-                                    still = input(
+                                continued = "X"
+                                while continued not in ("n", "t"):
+                                    continued = input(
                                         "KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                                    if still == "n":
+                                    if continued == "n":
                                         print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
                                         game_on = False
                                         start = False
                                         player_decision = "0"
                                         next_round = False
                                         break
-                                    if still == "t":
+                                    if continued == "t":
                                         print("\n" * 20)
                                         game_on = False
                                         player_decision = "0"
