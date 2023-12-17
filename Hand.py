@@ -11,15 +11,17 @@ class Hand:
         self.name = name
 
     def amount_money(self):
-        self.money = input("Ile pieniędzy wpłacasz?(Max 10000)\n")
+        while True:
+            try:
+                self.money = int(input("Ile pieniędzy wpłacasz?(Max 10000)\n"))
+                if self.money in range(1,10001):
+                    self.my_money = int(self.money)
+                    return self.my_money
+                else:
+                    print("Wpisz kwotę od 1 - 10000")
+            except ValueError:
+                print("Wpisz kwotę cyfrą")
 
-        while not self.money.isdigit():
-            self.money = input("Podaj kwotę cyfrą.\n")
-
-        self.my_money = int(self.money)
-        while self.my_money > 10000:
-            self.my_money = int(input("Nie możesz wpłacić więcej niż 10000\n"))
-        return self.my_money
 
     def chip_hand(self):
         self.technic = self.my_money
