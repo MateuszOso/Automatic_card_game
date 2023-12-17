@@ -34,9 +34,9 @@ class Hand:
 
         return self.all_chips and self.all_chips_list
 
-    def exchange_choice(self, decision):
+    def exchange_choice(self, decision_t_n):
 
-        while decision == "T" or decision == "t":
+        while decision_t_n == "t":
             żeton1 = input("Wpisz który żeton chcesz rozmienić.\n")
             while żeton1 not in [str(x) for x in self.all_chips_list]:
                 żeton1 = input("Nie masz takiego żetonu! Wpisz jeszcze raz:\n")
@@ -78,16 +78,19 @@ class Hand:
     def bet_money(self):
 
         self.bet_check = self.all_chips_list
-        player_bet = input("Jaką kwotę obstawiasz?\n")
 
-        while not player_bet.isdigit():
-            player_bet = input("Podaj kwotę przez wpisanie cyfr\n")
+        while True:
 
-        pb = int(player_bet)
-        while pb > self.my_money:
-            pb = int(input("Brak wystarczających funduszy. Podaj mniejszą kwotę\n"))
+            try:
+                player_bet = int(input("Jaką kwotę obstawiasz?\n"))
+                if player_bet > self.my_money:
+                    print("Brak wystarczających funduszy.")
+                else:
+                    pb = int(player_bet)
+                    return pb
+            except ValueError:
+                print("Podaj wartość cyfrą")
 
-        return pb
 
     def checker(self, pb):
 
@@ -107,8 +110,8 @@ class Hand:
                                 all_in = "y"
                                 return all_in
                     if ż == 1 and pb != 1 and pb != 0:
-                        decision = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
-                        return decision
+                        decision_t_n = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
+                        return decision_t_n
                     break
                 if ż == self.bet_check[count]:
                     count += 1
@@ -134,8 +137,8 @@ class Hand:
                         pb -= self.bet_check[count]
                         count += 1
                     elif ż == 1:
-                        decision = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
-                        return decision
+                        decision_t_n = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
+                        return decision_t_n
                     else:
                         break
 

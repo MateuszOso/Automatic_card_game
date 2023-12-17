@@ -16,7 +16,7 @@ while start:
     player = Hand(name)
     print(f"WITAJ W BLACKJACK {player.name}!")
 
-    c = Croupier()
+    croupier = Croupier()
     deck = Deck()
     deck.shuffle()
     player_cards = []
@@ -30,13 +30,13 @@ while start:
     all_in = "n"
 
     while True:
-        decision = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n").lower()
+        decision_t_n = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n").lower()
         # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków
-        while decision not in ("t", "n"):
-            decision = input("Wpisz  (T/N)\n").lower()
-        if decision == "n":
+        while decision_t_n not in ("t", "n"):
+            decision_t_n = input("Wpisz  (T/N)\n").lower()
+        if decision_t_n == "n":
             break
-        [żeton1, żeton2] = player.exchange_choice(decision)
+        [żeton1, żeton2] = player.exchange_choice(decision_t_n)
         player.exchange(int(żeton1), int(żeton2))
         input("GOTOWE!   [WCIŚNIJ ENTER]")
         player.show_my_chips()
@@ -217,7 +217,7 @@ while start:
                         player.show_cards(player_cards)
                         print("\n" * 2)
                         print("Karty krupiera to:")
-                        c.show_cards(croupier_cards)
+                        croupier.show_cards(croupier_cards)
 
                         for card in croupier_cards:
                             if card.figura == "As" and ace_checker == 0:
