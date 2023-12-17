@@ -57,11 +57,11 @@ while start:
         player_bet = player.bet_money()
         bet_acceptance = player.checker(player_bet)
 
-      # TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
+      #TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
         while bet_acceptance == "t" or bet_acceptance == "n":
             while bet_acceptance == "n":
                 input("W takim razie obstaw inną kwotę!   [WCIŚNIJ ENTER]")
-                # TODO, muszisz (dla samego siebie) starać się jak najlepiej nazywać zmienne
+                # TODO, muszisz (dla samego siebie) starać się jak najlepiej nazywać zmienne - DONE
                 player_bet = player.bet_money()
                 bet_acceptance = player.checker(player_bet)
             if bet_acceptance == "t":

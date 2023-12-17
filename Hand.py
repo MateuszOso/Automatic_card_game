@@ -55,9 +55,9 @@ class Hand:
 
     def exchange(self, żeton1, żeton2):
         new_chips_list = []
-        for obj in self.all_chips_list:
-            if żeton1 == obj:
-                self.all_chips_list.remove(obj)
+        for object in self.all_chips_list:
+            if żeton1 == object:
+                self.all_chips_list.remove(object)
                 while żeton1 > 0:
                     if żeton2 > żeton1:
                         for token in Global.żetony:
