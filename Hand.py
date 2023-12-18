@@ -126,6 +126,9 @@ class Hand:
                     elif count != len(self.bet_check):
                         player_bet -= token
                         next = "y"
+                    elif total == player_bet:
+                        player_bet -= total
+                        next = "y"
                 else:
                     while token < self.bet_check[count]:
                         count += 1
