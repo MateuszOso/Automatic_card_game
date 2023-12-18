@@ -24,7 +24,7 @@ class Hand:
 
     def chip_hand(self):
         self.technic = self.money
-        for token in Global.żetony:
+        for token in Global.tokens:
             while self.technic - token >= 0:
                 chip = Chip(token)
                 self.all_chips.append(chip)
@@ -36,37 +36,37 @@ class Hand:
     def exchange_choice(self, decision_t_n):
 
         while decision_t_n == "t":
-            żeton1 = input("Wpisz który żeton chcesz rozmienić.\n")
-            while żeton1 not in [str(x) for x in self.all_chips_list]:
-                żeton1 = input("Nie masz takiego żetonu! Wpisz jeszcze raz:\n")
-            while żeton1 == "1":
-                żeton1 = input("A na co chcesz rozmienieć 1? Nie da się! Wpisz jeszcze raz:\n")
-            żeton2 = input("Wpisz jakie żetony chcesz dostać.\n")
-            while not żeton2.isdigit():
-                żeton2 = input("Wpisz jakie żetony chcesz dostać cyfrą.\n")
-            while int(żeton2) > int(żeton1):
-                żeton2 = input("Nie możesz rozmienić mniejszego żetonu na większe! Wpisz jeszcze raz debilu:\n")
-            while żeton2 not in [str(x) for x in Global.żetony]:
-                żeton2 = input("Nie masz takiego żetonu! Wpisz jeszcze raz:\n")
-            while żeton2 == żeton1:
-                żeton2 = input("Nie możesz rozmienić żetonu na ten sam żeton! Wpisz jeszcze raz debilu:\n")
+            token1 = input("Wpisz który żeton chcesz rozmienić.\n")
+            while token1 not in [str(x) for x in self.all_chips_list]:
+                token1 = input("Nie masz takiego żetonu! Wpisz jeszcze raz:\n")
+            while token1 == "1":
+                token1 = input("A na co chcesz rozmienieć 1? Nie da się! Wpisz jeszcze raz:\n")
+            token2 = input("Wpisz jakie żetony chcesz dostać.\n")
+            while not token2.isdigit():
+                token2 = input("Wpisz jakie żetony chcesz dostać cyfrą.\n")
+            while int(token2) > int(token1):
+                token2 = input("Nie możesz rozmienić mniejszego żetonu na większe! Wpisz jeszcze raz debilu:\n")
+            while token2 not in [str(x) for x in Global.tokens]:
+                token2 = input("Nie masz takiego żetonu! Wpisz jeszcze raz:\n")
+            while token2 == token1:
+                token2 = input("Nie możesz rozmienić żetonu na ten sam żeton! Wpisz jeszcze raz debilu:\n")
 
-            return [int(żeton1), int(żeton2)]
+            return [int(token1), int(token2)]
 
-    def exchange(self, żeton1, żeton2):
+    def exchange(self, token1, token2):
         new_chips_list = []
-        for object in self.all_chips_list:
-            if żeton1 == object:
-                self.all_chips_list.remove(object)
-                while żeton1 > 0:
-                    if żeton2 > żeton1:
-                        for token in Global.żetony:
-                            while token <= żeton1 and (żeton1 - token) >= 0:
-                                żeton1 -= token
+        for chips in self.all_chips_list:
+            if token1 == chips:
+                self.all_chips_list.remove(chips)
+                while token1 > 0:
+                    if token2 > token1:
+                        for token in Global.tokens:
+                            while token <= token1 and (token1 - token) >= 0:
+                                token1 -= token
                                 new_chips_list.append(token)
                     else:
-                        new_chips_list.append(żeton2)
-                        żeton1 -= żeton2
+                        new_chips_list.append(token2)
+                        token1 -= token2
                 self.all_chips_list.extend(new_chips_list)
                 return self.all_chips_list.sort(reverse=True)
 
@@ -94,10 +94,10 @@ class Hand:
 
         org_player_bet = player_bet
         count = 0
-        for token in Global.żetony:
+        for token in Global.tokens:
             total = 0
-            next = "n"
-            while token <= player_bet and next == "n":
+            next_token = "n"
+            while token <= player_bet and next_token == "n":
                 if player_bet == 0:
                     break
                 if count == (len(self.bet_check) - 1):
@@ -122,10 +122,13 @@ class Hand:
                         count += 1
                     if total > token and count != len(self.bet_check):
                         player_bet -= total
-                        next = "y"
+                        next_token = "y"
                     elif count != len(self.bet_check):
                         player_bet -= token
-                        next = "y"
+                        next_token = "y"
+                    elif total == player_bet:
+                        player_bet -= total
+                        next_token = "y"
                 else:
                     while token < self.bet_check[count]:
                         count += 1
@@ -146,7 +149,7 @@ class Hand:
         bet_chips_list = []
         self.money -= player_bet
 
-        for token in Global.żetony:
+        for token in Global.tokens:
             while player_bet >= token:
                 if count == len(self.all_chips_list):
                     count = 0

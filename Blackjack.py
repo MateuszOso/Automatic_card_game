@@ -37,8 +37,8 @@ while start:
             decision_t_n = input("Wpisz  (T/N)\n").lower()
         if decision_t_n == "n":
             break
-        [żeton1, żeton2] = player.exchange_choice(decision_t_n)
-        player.exchange(int(żeton1), int(żeton2))
+        [token1, token2] = player.exchange_choice(decision_t_n)
+        player.exchange(int(token1), int(token2))
         input("GOTOWE!   [WCIŚNIJ ENTER]")
         player.show_my_chips()
 
@@ -88,7 +88,7 @@ while start:
                 for x in range(2):
                     card = deck.take_one()
                     player_cards.append(card)
-                    player_sum += card.wartość
+                    player_sum += card.value
 
                 print("Moje karty to:")
                 player.show_cards(player_cards)
@@ -97,7 +97,7 @@ while start:
                 for x in range(2):
                     card = deck.take_one()
                     croupier_cards.append(card)
-                    croupier_sum += card.wartość
+                    croupier_sum += card.value
 
                 print("\n" * 2)
                 print("Karty krupiera to:")
@@ -106,35 +106,35 @@ while start:
 
             if round_no == 0:
                 for card in player_cards:
-                    if card.figura == "As":
-                        card.wartość = deck.ace(card)
-                        player_sum += card.wartość
+                    if card.rank == "As":
+                        card.value = deck.ace(card)
+                        player_sum += card.value
             else:
                 card = player_cards[round_no + 1]
-                if card.figura == "As":
-                    card.wartość = deck.ace(card)
-                    player_sum += card.wartość
+                if card.rank == "As":
+                    card.value = deck.ace(card)
+                    player_sum += card.value
                 count = 0
                 for card in player_cards:
                     count += 1
                     # TODO, logika kart do dictionary albo podobnego typu - DONE
 
 
-                    if card.figura == "As":
+                    if card.rank == "As":
                         if count != len(player_cards):
                             ace_changer = "x"
                             # TODO, Powtarzalny kod powinien zostać wyniesiony do osobnej encji lub serwisu
                             while ace_changer not in ("t","n"):
-                                ace_changer = input(f"Czy chcesz zmienić wartość swojego {card.__str__()}?({card.wartość}) (T/N)\n").lower()
+                                ace_changer = input(f"Czy chcesz zmienić wartość swojego {card.__str__()}?({card.value}) (T/N)\n").lower()
                                 if ace_changer == "t":
-                                    card.wartość = deck.ace(card)
-                                    if card.wartość == 1:
+                                    card.value = deck.ace(card)
+                                    if card.value == 1:
                                         player_sum -= 11
                                     else:
                                         player_sum -= 1
-                                    player_sum += card.wartość
+                                    player_sum += card.value
                                 if ace_changer == "n":
-                                    print(f"Okej, wartoś Asa nadal wynosi {card.wartość}.")
+                                    print(f"Okej, wartoś Asa nadal wynosi {card.value}.")
 
             if round_no == 0 and player_sum == 21:
                 print("\n   BLACKJACK!")
@@ -191,7 +191,7 @@ while start:
                     print("Krupier dodaje kartę do Twojej ręki.\n")
                     card = deck.take_one()
                     player_cards.append(card)
-                    player_sum += card.wartość
+                    player_sum += card.value
                     round_no += 1
                     print("Moje karty to:")
                     player.show_cards(player_cards)
@@ -221,13 +221,13 @@ while start:
                         croupier.show_cards(croupier_cards)
 
                         for card in croupier_cards:
-                            if card.figura == "As" and ace_checker == 0:
-                                card.wartość = 11
+                            if card.rank == "As" and ace_checker == 0:
+                                card.value = 11
                                 croupier_sum += 11
                                 ace_checker += 1
                                 continue
-                            if card.figura == "As" and ace_checker == 1:
-                                card.wartość = 1
+                            if card.rank == "As" and ace_checker == 1:
+                                card.value = 1
                                 croupier_sum += 1
                                 ace_checker += 1
                         if croupier_sum == 21:
@@ -264,12 +264,12 @@ while start:
                             croupier_compare = 0
                             card = deck.take_one()
                             croupier_cards.append(card)
-                            if card.figura == "As":
-                                card.wartość = 11
-                            croupier_sum += card.wartość
+                            if card.rank == "As":
+                                card.value = 11
+                            croupier_sum += card.value
                             for card in croupier_cards:
-                                if croupier_sum > 21 and card.wartość == 11:
-                                    card.wartość = 1
+                                if croupier_sum > 21 and card.value == 11:
+                                    card.value = 1
                                     croupier_sum -= 10
                                 if croupier_count == croupier_compare:
                                     print(card)
