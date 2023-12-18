@@ -117,7 +117,7 @@ while start:
                 count = 0
                 for card in player_cards:
                     count += 1
-                    # TODO, logika kart do dictionary albo podobnego typu
+                    # TODO, logika kart do dictionary albo podobnego typu - DONE
 
 
                     if card.figura == "As":
