@@ -17,18 +17,15 @@ class Card:
         # TODO, ta logika powinna byc w serwisie do zarządzania kartami, encje slużą do określania kontraktów
         if card.figura == "As":
             if card.wartość == 0:
-                while card.wartość not in ["1", "11"]:
-                    card.wartość = input(f"\nWybierz wartość dla swojego {card.__str__()} (1 lub 11)\n")
-                    if card.wartość in ["1", "11"]:
-                        value = int(card.wartość)
-                        return value
+                while card.wartość not in [1, 11]:
+                    card.wartość = int(input(f"\nWybierz wartość dla swojego {card.__str__()} (1 lub 11)\n"))
+                    if card.wartość in [1, 11]:
+                        return card.wartość
             if card.wartość == 1:
                 print(f"\nTeraz Twój {card.__str__()} jest równy 11")
-                card.wartość = "11"
-                value = int(card.wartość)
-                return value
+                card.wartość = 11
+                return card.wartość
             elif card.wartość == 11:
                 print(f"\nTeraz Twój {card.__str__()} jest równy 1")
-                card.wartość = "1"
-                value = int(card.wartość)
-                return value
+                card.wartość = 1
+                return card.wartość
