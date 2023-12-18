@@ -8,9 +8,9 @@ class Deck(Card):
         self.all_cards = []
         # TODO, lecimy po angielsku
         # TODO, zaimplementuj singleton , for fun. https://refactoring.guru/design-patterns/singleton/python/example
-        for f in Global.figura:
-            for k in Global.kolor:
-                card = Card(k, f)
+        for r in Global.rank:
+            for c in Global.suit:
+                card = Card(c, r)
                 self.all_cards.append(card)
 
     def shuffle(self):

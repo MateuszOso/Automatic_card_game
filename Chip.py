@@ -1,7 +1,7 @@
 class Chip:
 
-    def __init__(self, żeton):
-        self.żeton = żeton
+    def __init__(self, chip):
+        self.chip = chip
 
     def __str__(self):
-        return f"{self.żeton}"
+        return f"{self.chip}"
