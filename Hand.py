@@ -55,9 +55,9 @@ class Hand:
 
     def exchange(self, token1, token2):
         new_chips_list = []
-        for object in self.all_chips_list:
-            if token1 == object:
-                self.all_chips_list.remove(object)
+        for chips in self.all_chips_list:
+            if token1 == chips:
+                self.all_chips_list.remove(chips)
                 while token1 > 0:
                     if token2 > token1:
                         for token in Global.tokens:
@@ -96,8 +96,8 @@ class Hand:
         count = 0
         for token in Global.tokens:
             total = 0
-            next = "n"
-            while token <= player_bet and next == "n":
+            next_token = "n"
+            while token <= player_bet and next_token == "n":
                 if player_bet == 0:
                     break
                 if count == (len(self.bet_check) - 1):
@@ -122,13 +122,13 @@ class Hand:
                         count += 1
                     if total > token and count != len(self.bet_check):
                         player_bet -= total
-                        next = "y"
+                        next_token = "y"
                     elif count != len(self.bet_check):
                         player_bet -= token
-                        next = "y"
+                        next_token = "y"
                     elif total == player_bet:
                         player_bet -= total
-                        next = "y"
+                        next_token = "y"
                 else:
                     while token < self.bet_check[count]:
                         count += 1
