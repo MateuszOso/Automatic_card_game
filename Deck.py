@@ -6,7 +6,7 @@ class Deck(Card):
 
     def __init__(self):
         self.all_cards = []
-        # TODO, lecimy po angielsku
+        # TODO, lecimy po angielsku - DONE
         # TODO, zaimplementuj singleton , for fun. https://refactoring.guru/design-patterns/singleton/python/example
         for r in Global.rank:
             for c in Global.suit:
