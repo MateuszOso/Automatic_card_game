@@ -1,4 +1,5 @@
 import Global
+import Service
 from Chip import Chip
 
 
@@ -110,7 +111,8 @@ class Hand:
                                 all_in = "y"
                                 return all_in
                     if token == 1 and player_bet != 1 and player_bet != 0:
-                        decision_t_n = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
+                        print("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić?")
+                        decision_t_n = Service.yes_no_answear()
                         return decision_t_n
                     break
                 if token == self.bet_check[count]:
@@ -140,7 +142,8 @@ class Hand:
                         player_bet -= self.bet_check[count]
                         count += 1
                     elif token == 1:
-                        decision_t_n = input("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić? (T/N)\n").lower()
+                        print("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić?")
+                        decision_t_n = Service.yes_no_answear()
                         return decision_t_n
                     else:
                         break
