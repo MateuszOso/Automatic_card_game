@@ -32,10 +32,9 @@ while start:
 
     while True:
 
-        decision_t_n = input("Czy chcesz rozmienić jakiś żeton?  (T/N)\n").lower()
+        print("Czy chcesz rozmienić jakiś żeton?")
+        decision_t_n = Service.yes_no_answear()
         # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków - DONE
-        while decision_t_n not in ("t", "n"):
-            decision_t_n = input("Wpisz  (T/N)\n").lower()
         if decision_t_n == "n":
             break
         [token1, token2] = player.exchange_choice(decision_t_n)

@@ -3,7 +3,7 @@
 def yes_no_answear():
 
     while True:
-        answear = input("T/N\n").lower()
+        answear = input("Wybierz (T/N)\n").lower()
         if answear == "t" or answear == "n":
             return answear
 
