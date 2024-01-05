@@ -3,6 +3,7 @@
 from Deck import Deck
 from Hand import Hand
 from Croupier import Croupier
+import Service
 
 
 # Initial
@@ -151,23 +152,11 @@ while start:
                 player.show_my_chips()
                 print(f"Moje środki to: {player.money}zł\n")
                 if player.money == 0:
-                    continued = "X"
                     # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it)
                     # TODO, na przykład plik ValidationService, który będzie zawierał metodę yes_no_answer
-                    while continued not in ("n", "t"):
-                        continued = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                        if continued == "n":
-                            print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
-                            game_on = False
-                            start = False
-                            next_round = False
-                            break
-                        if continued == "t":
-                            print("\n" * 20)
-                            game_on = False
-                            next_round = False
-                            break
-
+                    Service.end_game_print()
+                    answear = Service.yes_no_answear()
+                    Service.game_continuation(answear)
                 else:
                     print("\n" * 2)
                     player_decision = "0"
