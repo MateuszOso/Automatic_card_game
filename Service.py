@@ -14,14 +14,15 @@ def end_game_print():
 def game_continuation(answear):
     game_on = False
     start = False
+    player_decision = "0"
     next_round = False
     if answear == "n":
         print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
-        return game_on, start, next_round
+        return game_on, start, player_decision, next_round
 
     if answear == "t":
         start = True
         print("\n" * 20)
-        return game_on, start, next_round
+        return game_on, start, player_decision, next_round
 
 

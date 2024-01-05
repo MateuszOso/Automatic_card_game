@@ -156,7 +156,7 @@ while start:
                     # TODO, na przykład plik ValidationService, który będzie zawierał metodę yes_no_answer
                     Service.end_game_print()
                     answear = Service.yes_no_answear()
-                    game_on, start, next_round = Service.game_continuation(answear)
+                    game_on, start, player_decision, next_round = Service.game_continuation(answear)
                 else:
                     print("\n" * 2)
                     player_decision = "0"
@@ -225,22 +225,10 @@ while start:
                             print(f"Moje środki to: {player.money}zł\n")
 
                             if player.money == 0:
-                                continued = "X"
-                                while continued not in ("n", "t"):
-                                    continued = input("KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                                    if continued == "n":
-                                        print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
-                                        game_on = False
-                                        start = False
-                                        player_decision = "0"
-                                        next_round = False
-                                        break
-                                    if continued == "t":
-                                        print("\n" * 20)
-                                        game_on = False
-                                        player_decision = "0"
-                                        next_round = False
-                                        break
+                                Service.end_game_print()
+                                answear = Service.yes_no_answear()
+                                game_on, start, player_decision, next_round = Service.game_continuation(answear)
+
                             else:
                                 print("\n" * 2)
                                 player_decision = "0"
@@ -279,23 +267,9 @@ while start:
                             player.show_my_chips()
                             print(f"Moje środki to: {player.money}zł\n")
                             if player.money == 0:
-                                continued = "X"
-                                while continued not in ("n", "t"):
-                                    continued = input(
-                                        "KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                                    if continued == "n":
-                                        print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
-                                        game_on = False
-                                        start = False
-                                        player_decision = "0"
-                                        next_round = False
-                                        break
-                                    if continued == "t":
-                                        print("\n" * 20)
-                                        game_on = False
-                                        player_decision = "0"
-                                        next_round = False
-                                        break
+                                Service.end_game_print()
+                                answear = Service.yes_no_answear()
+                                game_on, start, player_decision, next_round = Service.game_continuation(answear)
                             else:
                                 print("\n" * 2)
                                 player_decision = "0"
@@ -308,23 +282,9 @@ while start:
                             player.show_my_chips()
                             print(f"Moje środki to: {player.money}zł\n")
                             if player.money == 0:
-                                continued = "X"
-                                while continued not in ("n", "t"):
-                                    continued = input(
-                                        "KONIEC GRY! STRACIŁEŚ WSZYSTKIE PIENIĄDZE!\nCZY CHCESZ ZAGRAĆ PONOWNIE?   (T/N)").lower()
-                                    if continued == "n":
-                                        print("\nDZIĘKUJĘ ZA GRĘ! NARA!")
-                                        game_on = False
-                                        start = False
-                                        player_decision = "0"
-                                        next_round = False
-                                        break
-                                    if continued == "t":
-                                        print("\n" * 20)
-                                        game_on = False
-                                        player_decision = "0"
-                                        next_round = False
-                                        break
+                                Service.end_game_print()
+                                answear = Service.yes_no_answear()
+                                game_on, start, player_decision, next_round = Service.game_continuation(answear)
 
                             else:
                                 print("\n" * 2)
