@@ -156,7 +156,7 @@ while start:
                     # TODO, na przykład plik ValidationService, który będzie zawierał metodę yes_no_answer
                     Service.end_game_print()
                     answear = Service.yes_no_answear()
-                    Service.game_continuation(answear)
+                    game_on, start, next_round = Service.game_continuation(answear)
                 else:
                     print("\n" * 2)
                     player_decision = "0"
