@@ -25,4 +25,12 @@ def game_continuation(answear):
         print("\n" * 20)
         return game_on, start, player_decision, next_round
 
+def next_turn(turn):
+    print("\n" * 2)
+    player_decision = "0"
+    next_round = False
+    turn += 1
+
+    return player_decision, next_round, turn
+
 

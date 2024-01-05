@@ -158,10 +158,7 @@ while start:
                     answear = Service.yes_no_answear()
                     game_on, start, player_decision, next_round = Service.game_continuation(answear)
                 else:
-                    print("\n" * 2)
-                    player_decision = "0"
-                    next_round = False
-                    turn += 1
+                    player_decision, next_round, turn = Service.next_turn(turn)
                     break
 
             else:
@@ -230,10 +227,7 @@ while start:
                                 game_on, start, player_decision, next_round = Service.game_continuation(answear)
 
                             else:
-                                print("\n" * 2)
-                                player_decision = "0"
-                                next_round = False
-                                turn += 1
+                                player_decision, next_round, turn = Service.next_turn(turn)
                                 break
                     else:
                         croupier_count = 2
@@ -271,10 +265,7 @@ while start:
                                 answear = Service.yes_no_answear()
                                 game_on, start, player_decision, next_round = Service.game_continuation(answear)
                             else:
-                                print("\n" * 2)
-                                player_decision = "0"
-                                next_round = False
-                                turn += 1
+                                player_decision, next_round, turn = Service.next_turn(turn)
                                 break
 
                         if croupier_sum < 21 and player_sum < croupier_sum:
@@ -287,10 +278,7 @@ while start:
                                 game_on, start, player_decision, next_round = Service.game_continuation(answear)
 
                             else:
-                                print("\n" * 2)
-                                player_decision = "0"
-                                next_round = False
-                                turn += 1
+                                player_decision, next_round, turn = Service.next_turn(turn)
                                 break
 
                         if croupier_sum < 21 and player_sum > croupier_sum:
