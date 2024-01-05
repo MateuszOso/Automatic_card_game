@@ -123,19 +123,18 @@ while start:
 
                     if card.rank == "As":
                         if count != len(player_cards):
-                            ace_changer = "x"
                             # TODO, Powtarzalny kod powinien zostać wyniesiony do osobnej encji lub serwisu
-                            while ace_changer not in ("t","n"):
-                                ace_changer = input(f"Czy chcesz zmienić wartość swojego {card.__str__()}?({card.value}) (T/N)\n").lower()
-                                if ace_changer == "t":
-                                    card.value = deck.ace(card)
-                                    if card.value == 1:
-                                        player_sum -= 11
-                                    else:
-                                        player_sum -= 1
-                                    player_sum += card.value
-                                if ace_changer == "n":
-                                    print(f"Okej, wartoś Asa nadal wynosi {card.value}.")
+                            print(f"Czy chcesz zmienić wartość swojego {card.__str__()}?({card.value})")
+                            ace_changer = Service.yes_no_answear()
+                            if ace_changer == "t":
+                                card.value = deck.ace(card)
+                                if card.value == 1:
+                                    player_sum -= 11
+                                else:
+                                    player_sum -= 1
+                                player_sum += card.value
+                            if ace_changer == "n":
+                                print(f"Okej, wartoś Asa nadal wynosi {card.value}.")
 
             if round_no == 0 and player_sum == 21:
                 print("\n   BLACKJACK!")
