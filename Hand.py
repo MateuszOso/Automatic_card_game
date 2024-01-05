@@ -84,6 +84,8 @@ class Hand:
                 player_bet = int(input("Jaką kwotę obstawiasz?\n"))
                 if player_bet > self.money:
                     print("Brak wystarczających funduszy.")
+                elif player_bet == 0:
+                    print("Serio?")
                 else:
                     return player_bet
             except ValueError:

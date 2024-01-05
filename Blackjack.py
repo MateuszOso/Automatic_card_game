@@ -134,7 +134,7 @@ while start:
                                     player_sum -= 1
                                 player_sum += card.value
                             if ace_changer == "n":
-                                print(f"Okej, wartoś Asa nadal wynosi {card.value}.")
+                                print(f"Okej, wartość Asa nadal wynosi {card.value}.")
 
             if round_no == 0 and player_sum == 21:
                 print("\n   BLACKJACK!")
