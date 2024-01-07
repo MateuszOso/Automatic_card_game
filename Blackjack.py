@@ -90,7 +90,6 @@ while start:
                     player_cards.append(card)
                     player_sum += card.value
 
-                print("Moje karty to:")
                 player.show_cards(player_cards)
 
             if round_no == 0:
@@ -177,7 +176,6 @@ while start:
                     player_cards.append(card)
                     player_sum += card.value
                     round_no += 1
-                    print("Moje karty to:")
                     player.show_cards(player_cards)
                     print("\n" * 2)
                     print("Karty krupiera to:")
@@ -198,7 +196,6 @@ while start:
                     if croupier_round == 1:
                         ace_checker = 0
                         print("\nKrupier odsłania swoją drugą kartę.\n")
-                        print("Moje karty to:")
                         player.show_cards(player_cards)
                         print("\n" * 2)
                         print("Karty krupiera to:")

@@ -48,7 +48,7 @@ class Hand:
             while int(token2) > int(token1):
                 token2 = input("Nie możesz rozmienić mniejszego żetonu na większe! Wpisz jeszcze raz debilu:\n")
             while token2 not in [str(x) for x in Global.tokens]:
-                token2 = input("Nie masz takiego żetonu! Wpisz jeszcze raz:\n")
+                token2 = input("Nie ma takich żetonów! Wpisz jeszcze raz:\n")
             while token2 == token1:
                 token2 = input("Nie możesz rozmienić żetonu na ten sam żeton! Wpisz jeszcze raz debilu:\n")
 
@@ -204,6 +204,6 @@ class Hand:
         print(f"1   ---> {len([x for x in self.all_chips_list if x == 1])}")
 
     def show_cards(self, all_cards):
-
+        print("Moje karty to:")
         for card in all_cards:
             print(card)
