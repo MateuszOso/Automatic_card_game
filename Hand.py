@@ -1,5 +1,5 @@
 import Global
-import Service
+import Game_service
 from Chip import Chip
 
 
@@ -112,7 +112,7 @@ class Hand:
                                 return all_in
                     if token == 1 and player_bet != 1 and player_bet != 0:
                         print("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić?")
-                        decision_t_n = Service.yes_no_answear()
+                        decision_t_n = Game_service.yes_no_answear()
                         return decision_t_n
                     break
                 if token == self.bet_check[count]:
@@ -143,7 +143,7 @@ class Hand:
                         count += 1
                     elif token == 1:
                         print("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić?")
-                        decision_t_n = Service.yes_no_answear()
+                        decision_t_n = Game_service.yes_no_answear()
                         return decision_t_n
                     else:
                         break

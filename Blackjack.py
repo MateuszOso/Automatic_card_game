@@ -3,7 +3,7 @@
 from Deck import Deck
 from Hand import Hand
 from Croupier import Croupier
-import Service
+import Game_service
 
 
 # Initial
@@ -33,7 +33,7 @@ while start:
     while True:
 
         print("Czy chcesz rozmienić jakiś żeton?")
-        decision_t_n = Service.yes_no_answear()
+        decision_t_n = Game_service.yes_no_answear()
         # TODO, odczytywane znaki zawsze sprowadzaj do małej litery, dzięki temu będziesz miał mniej warunków - DONE
         if decision_t_n == "n":
             break
@@ -123,7 +123,7 @@ while start:
                         if count != len(player_cards):
                             # TODO, Powtarzalny kod powinien zostać wyniesiony do osobnej encji lub serwisu - DONE
                             print(f"Czy chcesz zmienić wartość swojego {card.__str__()}?({card.value})")
-                            ace_changer = Service.yes_no_answear()
+                            ace_changer = Game_service.yes_no_answear()
                             if ace_changer == "t":
                                 card.value = deck.ace(card)
                                 if card.value == 1:
@@ -151,11 +151,11 @@ while start:
                 if player.money == 0:
                     # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it) - DONE
                     # TODO, na przykład plik ValidationService, który będzie zawierał metodę - DONE
-                    Service.end_game_print()
-                    answear = Service.yes_no_answear()
-                    game_on, start, player_decision, next_round = Service.game_continuation(answear)
+                    Game_service.end_game_print()
+                    answear = Game_service.yes_no_answear()
+                    game_on, start, player_decision, next_round = Game_service.game_continuation(answear)
                 else:
-                    player_decision, next_round, turn = Service.next_turn(turn)
+                    player_decision, next_round, turn = Game_service.next_turn(turn)
                     break
 
             else:
@@ -214,12 +214,12 @@ while start:
                             player.show_my_money()
 
                             if player.money == 0:
-                                Service.end_game_print()
-                                answear = Service.yes_no_answear()
-                                game_on, start, player_decision, next_round = Service.game_continuation(answear)
+                                Game_service.end_game_print()
+                                answear = Game_service.yes_no_answear()
+                                game_on, start, player_decision, next_round = Game_service.game_continuation(answear)
 
                             else:
-                                player_decision, next_round, turn = Service.next_turn(turn)
+                                player_decision, next_round, turn = Game_service.next_turn(turn)
                                 break
                     else:
                         croupier_count = 2
@@ -253,11 +253,11 @@ while start:
                             player.show_my_chips()
                             player.show_my_money()
                             if player.money == 0:
-                                Service.end_game_print()
-                                answear = Service.yes_no_answear()
-                                game_on, start, player_decision, next_round = Service.game_continuation(answear)
+                                Game_service.end_game_print()
+                                answear = Game_service.yes_no_answear()
+                                game_on, start, player_decision, next_round = Game_service.game_continuation(answear)
                             else:
-                                player_decision, next_round, turn = Service.next_turn(turn)
+                                player_decision, next_round, turn = Game_service.next_turn(turn)
                                 break
 
                         if croupier_sum < 21 and player_sum < croupier_sum:
@@ -265,12 +265,12 @@ while start:
                             player.show_my_chips()
                             player.show_my_money()
                             if player.money == 0:
-                                Service.end_game_print()
-                                answear = Service.yes_no_answear()
-                                game_on, start, player_decision, next_round = Service.game_continuation(answear)
+                                Game_service.end_game_print()
+                                answear = Game_service.yes_no_answear()
+                                game_on, start, player_decision, next_round = Game_service.game_continuation(answear)
 
                             else:
-                                player_decision, next_round, turn = Service.next_turn(turn)
+                                player_decision, next_round, turn = Game_service.next_turn(turn)
                                 break
 
                         if croupier_sum < 21 and player_sum > croupier_sum:
