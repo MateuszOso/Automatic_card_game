@@ -1,5 +1,6 @@
 import Global
 
+
 class Card:
 
     specific_bhevaior_predicate = None
@@ -11,5 +12,3 @@ class Card:
 
     def __str__(self):
         return f"{self.rank} {self.suit}"
-
-

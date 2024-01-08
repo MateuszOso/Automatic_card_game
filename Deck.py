@@ -2,6 +2,7 @@ from Card import Card
 import Global
 import random
 
+
 class Deck(Card):
 
     def __init__(self):

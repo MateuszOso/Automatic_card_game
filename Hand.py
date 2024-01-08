@@ -15,13 +15,12 @@ class Hand:
         while True:
             try:
                 self.money = int(input("Ile pieniędzy wpłacasz?(Max 10000)\n"))
-                if self.money in range(1,10001):
+                if self.money in range(1, 10001):
                     return self.money
                 else:
                     print("Wpisz kwotę od 1 - 10000")
             except ValueError:
                 print("Wpisz kwotę cyfrą")
-
 
     def chip_hand(self):
         self.technic = self.money
@@ -71,7 +70,6 @@ class Hand:
                 self.all_chips_list.extend(new_chips_list)
                 return self.all_chips_list.sort(reverse=True)
 
-
     def get_card(self, card):
         self.all_cards.append(card)
 
@@ -91,7 +89,6 @@ class Hand:
                     return player_bet
             except ValueError:
                 print("Podaj wartość cyfrą")
-
 
     def checker(self, player_bet):
 
