@@ -98,7 +98,6 @@ while start:
                     croupier_cards.append(card)
                     croupier_sum += card.value
 
-                print("\n" * 2)
                 print("Karty krupiera to:")
                 print(f"{croupier_cards[0]}")
                 print("Druga karta krupiera jest zakryta.")
@@ -177,7 +176,6 @@ while start:
                     player_sum += card.value
                     round_no += 1
                     player.show_cards(player_cards)
-                    print("\n" * 2)
                     print("Karty krupiera to:")
                     print(f"{croupier_cards[0]}")
                     print("Druga karta krupiera jest zakryta.")
@@ -197,7 +195,6 @@ while start:
                         ace_checker = 0
                         print("\nKrupier odsłania swoją drugą kartę.\n")
                         player.show_cards(player_cards)
-                        print("\n" * 2)
                         croupier.show_cards(croupier_cards)
 
                         for card in croupier_cards:

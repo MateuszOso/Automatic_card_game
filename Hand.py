@@ -207,3 +207,4 @@ class Hand:
         print("Moje karty to:")
         for card in all_cards:
             print(card)
+        print("\n" * 2)
