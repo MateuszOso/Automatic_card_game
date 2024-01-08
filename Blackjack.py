@@ -49,7 +49,8 @@ while start:
     while game_on:
 
         if turn != 0:
-            deck = Deck()
+            deck.all_cards.extend(player_cards)
+            deck.all_cards.extend(croupier_cards)
             deck.shuffle()
             player_cards = []
             croupier_cards = []
@@ -161,7 +162,7 @@ while start:
                 player_decision = 0
                 print("\n" * 2)
                 print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
-                # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance
+                # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance - KIND OF
                 # Big O notation (google it)
                 while player_decision not in ['1', '2']:
                     player_decision = input("1 - Pas \n2 - Dobieram \n")
