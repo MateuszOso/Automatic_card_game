@@ -4,6 +4,7 @@ from Deck import Deck
 from Hand import Hand
 from Croupier import Croupier
 import Game_service
+import Card_service
 
 
 # Initial
@@ -106,26 +107,25 @@ while start:
             if round_no == 0:
                 for card in player_cards:
                     if card.rank == "As":
-                        card.value = deck.ace(card)
+                        card.value = Card_service.ace(card)
                         player_sum += card.value
             else:
                 card = player_cards[round_no + 1]
                 if card.rank == "As":
-                    card.value = deck.ace(card)
+                    card.value = Card_service.ace(card)
                     player_sum += card.value
                 count = 0
                 for card in player_cards:
                     count += 1
                     # TODO, logika kart do dictionary albo podobnego typu - DONE
 
-
                     if card.rank == "As":
                         if count != len(player_cards):
                             # TODO, Powtarzalny kod powinien zostać wyniesiony do osobnej encji lub serwisu - DONE
-                            print(f"Czy chcesz zmienić wartość swojego {card.__str__()}?({card.value})")
+                            print(f"\nCzy chcesz zmienić wartość swojego {card.__str__()}?({card.value})\n")
                             ace_changer = Game_service.yes_no_answear()
                             if ace_changer == "t":
-                                card.value = deck.ace(card)
+                                card.value = Card_service.ace(card)
                                 if card.value == 1:
                                     player_sum -= 11
                                 else:
@@ -260,7 +260,7 @@ while start:
                                 player_decision, next_round, turn = Game_service.next_turn(turn)
                                 break
 
-                        if croupier_sum < 21 and player_sum < croupier_sum:
+                        if player_sum < croupier_sum < 21:
                             print("\nPRZEGRANA! SUMA KART KRUPIERA WYŻSZA OD TWOJEJ!")
                             player.show_my_chips()
                             player.show_my_money()
@@ -283,7 +283,7 @@ while start:
                             turn += 1
                             break
 
-                        if croupier_sum < 21 and player_sum == croupier_sum:
+                        if player_sum == croupier_sum < 21:
                             print("\nREMIS! OBSTAWIONA KWOTA WRACA DO CIEBIE!")
                             player.draw(bet_chips_list, player_bet)
                             player.show_my_chips()
