@@ -137,7 +137,7 @@ while start:
                 print("\n   BLACKJACK!")
                 player.blackjack(bet_chips_list, player_bet)
                 player.show_my_chips()
-                print(f"Moje środki to: {player.money}zł\n")
+                player.show_my_money()
                 next_round = False
                 turn += 1
                 break
@@ -146,7 +146,7 @@ while start:
                 print("\n")
                 print("PRZEGRANA! SUMA KART WIĘKSZA NIŻ 21! TRACISZ ŻETONY!")
                 player.show_my_chips()
-                print(f"Moje środki to: {player.money}zł\n")
+                player.show_my_money()
                 if player.money == 0:
                     # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it)
                     # TODO, na przykład plik ValidationService, który będzie zawierał metodę - DONE
@@ -183,7 +183,7 @@ while start:
                         print("\nSUMA TWOICH KART TO 21! WYGRANA!")
                         player.win_bet(bet_chips_list, player_bet)
                         player.show_my_chips()
-                        print(f"Moje środki to: {player.money}zł\n")
+                        player.show_my_money()
                         next_round = False
                         player_decision = "0"
                         turn += 1
@@ -210,7 +210,7 @@ while start:
                         if croupier_sum == 21:
                             print("\nPRZEGRANA! SUMA KART KRUPIERA TO 21!")
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.money}zł\n")
+                            player.show_my_money()
 
                             if player.money == 0:
                                 Service.end_game_print()
@@ -242,7 +242,7 @@ while start:
                             print("\nSUMA KART KRUPIERA WYŻSZA NIŻ 21! WYGRANA")
                             player.win_bet(bet_chips_list, player_bet)
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.money}zł\n")
+                            player.show_my_money()
                             next_round = False
                             player_decision = "0"
                             turn += 1
@@ -250,7 +250,7 @@ while start:
                         if croupier_sum == 21:
                             print("\nPRZEGRANA! SUMA KART KRUPIERA TO 21!")
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.money}zł\n")
+                            player.show_my_money()
                             if player.money == 0:
                                 Service.end_game_print()
                                 answear = Service.yes_no_answear()
@@ -262,7 +262,7 @@ while start:
                         if croupier_sum < 21 and player_sum < croupier_sum:
                             print("\nPRZEGRANA! SUMA KART KRUPIERA WYŻSZA OD TWOJEJ!")
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.money}zł\n")
+                            player.show_my_money()
                             if player.money == 0:
                                 Service.end_game_print()
                                 answear = Service.yes_no_answear()
@@ -276,7 +276,7 @@ while start:
                             print("\nSUMA KART GRACZA WYŻSZA NIŻ KRUPIERA! WYGRANA")
                             player.win_bet(bet_chips_list, player_bet)
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.money}zł\n")
+                            player.show_my_money()
                             next_round = False
                             player_decision = "0"
                             turn += 1
@@ -286,7 +286,7 @@ while start:
                             print("\nREMIS! OBSTAWIONA KWOTA WRACA DO CIEBIE!")
                             player.draw(bet_chips_list, player_bet)
                             player.show_my_chips()
-                            print(f"Moje środki to: {player.money}zł\n")
+                            player.show_my_money()
                             next_round = False
                             player_decision = "0"
                             turn += 1

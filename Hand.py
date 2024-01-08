@@ -204,7 +204,12 @@ class Hand:
         print(f"1   ---> {len([x for x in self.all_chips_list if x == 1])}")
 
     def show_cards(self, all_cards):
+
         print("Moje karty to:")
         for card in all_cards:
             print(card)
         print("\n" * 2)
+
+    def show_my_money(self):
+
+        print(f"Moje środki to: {self.money}zł\n")
