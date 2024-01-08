@@ -150,7 +150,7 @@ while start:
                 print(f"Moje środki to: {player.money}zł\n")
                 if player.money == 0:
                     # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it)
-                    # TODO, na przykład plik ValidationService, który będzie zawierał metodę yes_no_answer
+                    # TODO, na przykład plik ValidationService, który będzie zawierał metodę - DONE
                     Service.end_game_print()
                     answear = Service.yes_no_answear()
                     game_on, start, player_decision, next_round = Service.game_continuation(answear)
@@ -198,7 +198,6 @@ while start:
                         print("\nKrupier odsłania swoją drugą kartę.\n")
                         player.show_cards(player_cards)
                         print("\n" * 2)
-                        print("Karty krupiera to:")
                         croupier.show_cards(croupier_cards)
 
                         for card in croupier_cards:
