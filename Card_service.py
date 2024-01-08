@@ -1,5 +1,5 @@
 def ace(card):
-    # TODO, ta logika powinna byc w serwisie do zarządzania kartami, encje slużą do określania kontraktów
+    # TODO, ta logika powinna byc w serwisie do zarządzania kartami, encje slużą do określania kontraktów - DONE
     if card.rank == "As":
         if card.value == 0:
             while card.value not in [1, 11]:
