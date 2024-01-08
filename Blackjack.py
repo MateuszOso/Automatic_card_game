@@ -161,6 +161,8 @@ while start:
             else:
                 player_decision = 0
                 print("\n" * 2)
+                if round_no == 0:
+                    print("To jest runda 1")
                 print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
                 # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance - KIND OF
                 # Big O notation (google it)
