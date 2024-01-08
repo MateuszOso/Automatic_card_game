@@ -58,7 +58,7 @@ while start:
         player_bet = player.bet_money()
         bet_acceptance = player.checker(player_bet)
 
-      #TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
+        # TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
         while bet_acceptance == "t" or bet_acceptance == "n":
             while bet_acceptance == "n":
                 input("W takim razie obstaw inną kwotę!   [WCIŚNIJ ENTER]")
@@ -120,7 +120,7 @@ while start:
 
                     if card.rank == "As":
                         if count != len(player_cards):
-                            # TODO, Powtarzalny kod powinien zostać wyniesiony do osobnej encji lub serwisu
+                            # TODO, Powtarzalny kod powinien zostać wyniesiony do osobnej encji lub serwisu - DONE
                             print(f"Czy chcesz zmienić wartość swojego {card.__str__()}?({card.value})")
                             ace_changer = Service.yes_no_answear()
                             if ace_changer == "t":
@@ -148,7 +148,7 @@ while start:
                 player.show_my_chips()
                 player.show_my_money()
                 if player.money == 0:
-                    # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it)
+                    # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it) - DONE
                     # TODO, na przykład plik ValidationService, który będzie zawierał metodę - DONE
                     Service.end_game_print()
                     answear = Service.yes_no_answear()
