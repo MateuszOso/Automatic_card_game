@@ -162,7 +162,13 @@ while start:
                 player_decision = 0
                 print("\n" * 2)
                 if round_no == 0:
-                    print("To jest runda 1")
+                    print("Wybierz co chcesz zrobić, przez wybranie 1, 2 lub 3:")
+                    while player_decision not in ['1', '2', '3']:
+                    player_decision = input("1 - Pas \n2 - Dobieram \n3 - Podwojenie stawki")
+                    if player_decision not in ['1', '2', '3']:
+                        print("Wpisz 1, 2 lub 3")
+
+
                 print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
                 # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance - KIND OF
                 # Big O notation (google it)
