@@ -79,6 +79,7 @@ while start:
         input("KRUPIER LOSUJE KARTY!   [WCIŚNIJ ENTER]")
         print("\n" * 20)
 
+        round_no_3 = "no"
         round_no = 0
         croupier_round = 0
         player_sum = 0
@@ -164,7 +165,7 @@ while start:
                 if round_no == 0:
                     print("Wybierz co chcesz zrobić, przez wybranie 1, 2 lub 3:")
                     while player_decision not in ['1', '2', '3']:
-                        player_decision = input("1 - Pas \n2 - Dobieram \n3 - Podwojenie stawki")
+                        player_decision = input("1 - Pas \n2 - Dobieram \n3 - Podwojenie stawki \n")
                         if player_decision not in ['1', '2', '3']:
                             print("Wpisz 1, 2 lub 3")
 
@@ -176,12 +177,12 @@ while start:
                         card = deck.take_one()
                         player_cards.append(card)
                         player_sum += card.value
-                        round_no += 1
                         player.show_cards(player_cards)
                         print("Karty krupiera to:")
                         print(f"{croupier_cards[0]}")
                         print("Druga karta krupiera jest zakryta.")
                         player_decision = "1"
+                        round_no_3 = "yes"
 
                 if round_no != 0:
                     print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
@@ -203,15 +204,15 @@ while start:
                     print("Karty krupiera to:")
                     print(f"{croupier_cards[0]}")
                     print("Druga karta krupiera jest zakryta.")
-                    if player_sum == 21:
-                        print("\nSUMA TWOICH KART TO 21! WYGRANA!")
-                        player.win_bet(bet_chips_list, player_bet)
-                        player.show_my_chips()
-                        player.show_my_money()
-                        next_round = False
-                        player_decision = "0"
-                        turn += 1
-                        break
+                if player_sum == 21:
+                    print("\nSUMA TWOICH KART TO 21! WYGRANA!")
+                    player.win_bet(bet_chips_list, player_bet)
+                    player.show_my_chips()
+                    player.show_my_money()
+                    next_round = False
+                    player_decision = "0"
+                    turn += 1
+                    break
 
                 while player_decision == "1":
                     croupier_round += 1
@@ -308,6 +309,8 @@ while start:
 
                         if player_sum == croupier_sum < 21:
                             print("\nREMIS! OBSTAWIONA KWOTA WRACA DO CIEBIE!")
+                            if round_no_3 == "yes":
+                                player_bet /= 2
                             player.draw(bet_chips_list, player_bet)
                             player.show_my_chips()
                             player.show_my_money()
