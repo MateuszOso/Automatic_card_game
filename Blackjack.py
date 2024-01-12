@@ -174,6 +174,8 @@ while start:
                         print(f"Zakład powiększony do {player_bet * 2}!")
                         print("Krupier dodaje trzecią i ostatnią kartę do Twojej ręki.\n")
                         player_bet *= 2
+                        bet_acceptance = player.checker(player_bet)
+                        bet_chips_list = player.bet(player_bet/2)
                         card = deck.take_one()
                         player_cards.append(card)
                         player_sum += card.value
@@ -309,8 +311,6 @@ while start:
 
                         if player_sum == croupier_sum < 21:
                             print("\nREMIS! OBSTAWIONA KWOTA WRACA DO CIEBIE!")
-                            if round_no_3 == "yes":
-                                player_bet /= 2
                             player.draw(bet_chips_list, player_bet)
                             player.show_my_chips()
                             player.show_my_money()
