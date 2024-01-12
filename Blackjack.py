@@ -164,18 +164,33 @@ while start:
                 if round_no == 0:
                     print("Wybierz co chcesz zrobić, przez wybranie 1, 2 lub 3:")
                     while player_decision not in ['1', '2', '3']:
-                    player_decision = input("1 - Pas \n2 - Dobieram \n3 - Podwojenie stawki")
-                    if player_decision not in ['1', '2', '3']:
-                        print("Wpisz 1, 2 lub 3")
+                        player_decision = input("1 - Pas \n2 - Dobieram \n3 - Podwojenie stawki")
+                        if player_decision not in ['1', '2', '3']:
+                            print("Wpisz 1, 2 lub 3")
 
+                    if player_decision == "3":
+                        print("\n" * 20)
+                        print(f"Zakład powiększony do {player_bet * 2}!")
+                        print("Krupier dodaje trzecią i ostatnią kartę do Twojej ręki.\n")
+                        player_bet *= 2
+                        card = deck.take_one()
+                        player_cards.append(card)
+                        player_sum += card.value
+                        round_no += 1
+                        player.show_cards(player_cards)
+                        print("Karty krupiera to:")
+                        print(f"{croupier_cards[0]}")
+                        print("Druga karta krupiera jest zakryta.")
+                        player_decision = "1"
 
-                print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
-                # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance - KIND OF
-                # Big O notation (google it)
-                while player_decision not in ['1', '2']:
-                    player_decision = input("1 - Pas \n2 - Dobieram \n")
-                    if player_decision not in ['1', '2']:
-                        print("Wpisz 1 lub 2")
+                if round_no != 0:
+                    print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
+                    # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance - KIND OF
+                    # Big O notation (google it)
+                    while player_decision not in ['1', '2']:
+                        player_decision = input("1 - Pas \n2 - Dobieram \n")
+                        if player_decision not in ['1', '2']:
+                            print("Wpisz 1 lub 2")
 
                 if player_decision == "2":
                     print("\n" * 20)
