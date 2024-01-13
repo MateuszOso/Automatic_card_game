@@ -144,21 +144,6 @@ while start:
                 turn += 1
                 break
 
-            if player_sum > 21:
-                print("\n")
-                print("PRZEGRANA! SUMA KART WIĘKSZA NIŻ 21! TRACISZ ŻETONY!")
-                player.show_my_chips()
-                player.show_my_money()
-                if player.money == 0:
-                    # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it) - DONE
-                    # TODO, na przykład plik ValidationService, który będzie zawierał metodę - DONE
-                    Game_service.end_game_print()
-                    answear = Game_service.yes_no_answear()
-                    game_on, start, player_decision, next_round = Game_service.game_continuation(answear)
-                else:
-                    player_decision, next_round, turn = Game_service.next_turn(turn)
-                    break
-
             else:
                 player_decision = 0
                 print("\n" * 2)
@@ -179,10 +164,6 @@ while start:
                         card = deck.take_one()
                         player_cards.append(card)
                         player_sum += card.value
-                        player.show_cards(player_cards)
-                        print("Karty krupiera to:")
-                        print(f"{croupier_cards[0]}")
-                        print("Druga karta krupiera jest zakryta.")
                         player_decision = "1"
                         round_no_3 = "yes"
 
@@ -206,6 +187,22 @@ while start:
                     print("Karty krupiera to:")
                     print(f"{croupier_cards[0]}")
                     print("Druga karta krupiera jest zakryta.")
+
+                if player_sum > 21:
+                    print("\n")
+                    print("PRZEGRANA! SUMA KART WIĘKSZA NIŻ 21! TRACISZ ŻETONY!")
+                    player.show_my_chips()
+                    player.show_my_money()
+                    if player.money == 0:
+                        # TODO, Warunki można wynieść do metod i później się tylko do nich odwoływać (predicate, google it) - DONE
+                        # TODO, na przykład plik ValidationService, który będzie zawierał metodę - DONE
+                        Game_service.end_game_print()
+                        answear = Game_service.yes_no_answear()
+                        game_on, start, player_decision, next_round = Game_service.game_continuation(answear)
+                    else:
+                        player_decision, next_round, turn = Game_service.next_turn(turn)
+                        break
+
                 if player_sum == 21:
                     print("\nSUMA TWOICH KART TO 21! WYGRANA!")
                     player.win_bet(bet_chips_list, player_bet)
