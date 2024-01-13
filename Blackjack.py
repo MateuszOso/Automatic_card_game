@@ -79,7 +79,6 @@ while start:
         input("KRUPIER LOSUJE KARTY!   [WCIŚNIJ ENTER]")
         print("\n" * 20)
 
-        round_no_3 = "no"
         round_no = 0
         croupier_round = 0
         player_sum = 0
@@ -158,14 +157,17 @@ while start:
                         print("\n" * 20)
                         print(f"Zakład powiększony do {player_bet * 2}!")
                         print("Krupier dodaje trzecią i ostatnią kartę do Twojej ręki.\n")
+                        bet_chips_list = player.bet(player_bet)
                         player_bet *= 2
-                        bet_acceptance = player.checker(player_bet)
-                        bet_chips_list = player.bet(player_bet/2)
                         card = deck.take_one()
                         player_cards.append(card)
                         player_sum += card.value
+                        player.show_cards(player_cards)
+                        print("Karty krupiera to:")
+                        print(f"{croupier_cards[0]}")
+                        print("Druga karta krupiera jest zakryta.")
+                        bet_chips_list *= 2
                         player_decision = "1"
-                        round_no_3 = "yes"
 
                 if round_no != 0:
                     print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
