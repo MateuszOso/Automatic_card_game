@@ -23,6 +23,7 @@ while start:
     deck.shuffle()
     player_cards = []
     croupier_cards = []
+    dealt_cards = []
     player.amount_money()
     input(f"!!!{player.money}!!! JAZDA! ZACZYNAMY!   [WCIŚNIJ ENTER]")
     player.chip_hand()
@@ -50,11 +51,16 @@ while start:
     while game_on:
 
         if turn != 0:
-            deck.all_cards.extend(player_cards)
-            deck.all_cards.extend(croupier_cards)
+            dealt_cards.extend(player_cards)
+            dealt_cards.extend(croupier_cards)
+            for card in dealt_cards:
+                if card.rank == "As":
+                    card.value = 0
+            deck.all_cards.extend(dealt_cards)
             deck.shuffle()
             player_cards = []
             croupier_cards = []
+            dealt_cards = []
             all_in = "n"
 
         player_bet = player.bet_money()
@@ -166,6 +172,10 @@ while start:
                         print("Karty krupiera to:")
                         print(f"{croupier_cards[0]}")
                         print("Druga karta krupiera jest zakryta.")
+                        for card in player_cards:
+                            if card.rank == "As":
+                                card.value = Card_service.ace(card)
+                                player_sum += card.value
                         bet_chips_list *= 2
                         player_decision = "1"
 
