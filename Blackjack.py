@@ -91,20 +91,18 @@ while start:
         croupier_sum = 0
         next_round = True
         while next_round:
+            # Początkowe losowanie kart
 
             if round_no == 0:
                 for x in range(2):
                     card = deck.take_one()
                     player_cards.append(card)
                     player_sum += card.value
-
-                player.show_cards(player_cards)
-
-            if round_no == 0:
-                for x in range(2):
                     card = deck.take_one()
                     croupier_cards.append(card)
                     croupier_sum += card.value
+
+                player.show_cards(player_cards)
 
                 print("Karty krupiera to:")
                 print(f"{croupier_cards[0]}")
