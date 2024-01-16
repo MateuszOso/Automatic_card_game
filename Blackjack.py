@@ -33,6 +33,7 @@ while start:
     all_in = "n"
 
     while True:
+        # Rozmienianie żetonów
 
         print("Czy chcesz rozmienić jakiś żeton?")
         decision_t_n = Game_service.yes_no_answear()
@@ -49,6 +50,7 @@ while start:
     game_on = True
 
     while game_on:
+        # Tworzenie nowej talii do kolejnej tury
 
         if turn != 0:
             dealt_cards.extend(player_cards)
@@ -63,9 +65,11 @@ while start:
             dealt_cards = []
             all_in = "n"
 
+        # Obstawienie pieniędzy
         player_bet = player.bet_money()
         bet_acceptance = player.checker(player_bet)
 
+        # Walidacja zakładu
         # TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
         while bet_acceptance == "t" or bet_acceptance == "n":
             while bet_acceptance == "n":
@@ -85,13 +89,14 @@ while start:
         input("KRUPIER LOSUJE KARTY!   [WCIŚNIJ ENTER]")
         print("\n" * 20)
 
+        # Zmienne aktualnej gry
         round_no = 0
         croupier_round = 0
         player_sum = 0
         croupier_sum = 0
         next_round = True
         while next_round:
-            # Początkowe losowanie kart
+            # Początkowe rozdanie kart
 
             if round_no == 0:
                 for x in range(2):
@@ -108,12 +113,14 @@ while start:
                 print(f"{croupier_cards[0]}")
                 print("Druga karta krupiera jest zakryta.")
 
-            if round_no == 0:
+                # Początkowe określanie asów
                 for card in player_cards:
                     if card.rank == "As":
                         card.value = Card_service.ace(card)
                         player_sum += card.value
             else:
+
+                # Logika asów w kolejnych rundach
                 card = player_cards[round_no + 1]
                 if card.rank == "As":
                     card.value = Card_service.ace(card)
@@ -138,6 +145,7 @@ while start:
                             if ace_changer == "n":
                                 print(f"Okej, wartość Asa nadal wynosi {card.value}.")
 
+            # Blackjack
             if round_no == 0 and player_sum == 21:
                 print("\n   BLACKJACK!")
                 player.blackjack(bet_chips_list, player_bet)
@@ -150,6 +158,8 @@ while start:
             else:
                 player_decision = 0
                 print("\n" * 2)
+
+                # Decyzja w 1 rundzie
                 if round_no == 0:
                     print("Wybierz co chcesz zrobić, przez wybranie 1, 2 lub 3:")
                     while player_decision not in ['1', '2', '3']:
@@ -157,6 +167,7 @@ while start:
                         if player_decision not in ['1', '2', '3']:
                             print("Wpisz 1, 2 lub 3")
 
+                    # Double down
                     if player_decision == "3":
                         print("\n" * 20)
                         print(f"Zakład powiększony do {player_bet * 2}!")
@@ -177,7 +188,8 @@ while start:
                         bet_chips_list *= 2
                         player_decision = "1"
 
-                if round_no != 0:
+                # Decyzje w kolejnych rundach
+                else:
                     print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
                     # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance - KIND OF
                     # Big O notation (google it)
@@ -186,6 +198,7 @@ while start:
                         if player_decision not in ['1', '2']:
                             print("Wpisz 1 lub 2")
 
+                # Dobranie karty przez gracza
                 if player_decision == "2":
                     print("\n" * 20)
                     print("Krupier dodaje kartę do Twojej ręki.\n")
@@ -198,6 +211,7 @@ while start:
                     print(f"{croupier_cards[0]}")
                     print("Druga karta krupiera jest zakryta.")
 
+                # Przewalenie
                 if player_sum > 21:
                     print("\n")
                     print("PRZEGRANA! SUMA KART WIĘKSZA NIŻ 21! TRACISZ ŻETONY!")
@@ -213,6 +227,7 @@ while start:
                         player_decision, next_round, turn = Game_service.next_turn(turn)
                         break
 
+                # Trafienie w 21
                 if player_sum == 21:
                     print("\nSUMA TWOICH KART TO 21! WYGRANA!")
                     player.win_bet(bet_chips_list, player_bet)
@@ -223,6 +238,7 @@ while start:
                     turn += 1
                     break
 
+                # Pas
                 while player_decision == "1":
                     croupier_round += 1
                     if croupier_round == 1:
