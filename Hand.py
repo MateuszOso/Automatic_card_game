@@ -110,6 +110,8 @@ class Hand:
             while token <= player_bet and next_token == "n":
                 if player_bet == 0:
                     break
+                if player_bet > token > self.bet_check[count]:
+                    break
                 if count == (len(self.bet_check) - 1):
                     if player_bet == self.bet_check[-1]:
                         if player_bet - token == 0:
