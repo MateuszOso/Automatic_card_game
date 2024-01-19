@@ -91,6 +91,7 @@ while start:
 
         # Zmienne aktualnej gry
         round_no = 0
+        player_decision = "0"
         croupier_round = 0
         player_sum = 0
         croupier_sum = 0
@@ -156,7 +157,6 @@ while start:
                 break
 
             else:
-                player_decision = 0
                 print("\n" * 2)
 
                 # Decyzja w 1 rundzie
@@ -181,15 +181,12 @@ while start:
                         print("Karty krupiera to:")
                         print(f"{croupier_cards[0]}")
                         print("Druga karta krupiera jest zakryta.")
-                        for card in player_cards:
-                            if card.rank == "As":
-                                card.value = Card_service.ace(card)
-                                player_sum += card.value
                         bet_chips_list *= 2
-                        player_decision = "1"
+                        round_no += 1
+
 
                 # Decyzje w kolejnych rundach
-                else:
+                elif round_no != 0 and player_decision != "3":
                     print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
                     # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance - KIND OF
                     # Big O notation (google it)
@@ -197,6 +194,9 @@ while start:
                         player_decision = input("1 - Pas \n2 - Dobieram \n")
                         if player_decision not in ['1', '2']:
                             print("Wpisz 1 lub 2")
+
+                else:
+                    player_decision = "1"
 
                 # Dobranie karty przez gracza
                 if player_decision == "2":
@@ -206,6 +206,7 @@ while start:
                     player_cards.append(card)
                     player_sum += card.value
                     round_no += 1
+                    player_decision = "0"
                     player.show_cards(player_cards)
                     print("Karty krupiera to:")
                     print(f"{croupier_cards[0]}")
