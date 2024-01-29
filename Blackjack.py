@@ -58,7 +58,7 @@ while start:
             for card in dealt_cards:
                 if card.rank == "As":
                     card.value = 0
-            deck.all_cards.extend(dealt_cards)
+            deck.cards.extend(dealt_cards)
             deck.shuffle()
             player_cards = []
             croupier_cards = []
