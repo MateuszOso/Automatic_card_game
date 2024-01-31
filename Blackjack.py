@@ -66,8 +66,9 @@ while start:
             all_in = "n"
 
         # Obstawienie pieniędzy
+        double_down = 0
         player_bet = player.bet_money()
-        bet_acceptance = player.checker(player_bet)
+        bet_acceptance = player.checker(player_bet, double_down)
 
         # Walidacja zakładu
         # TODO, jako ostatnie. Wszystkie teksty w jednym pliku, łatwo odczytywalnym (nie lista, nie array, nie zbiór)
@@ -76,13 +77,13 @@ while start:
                 input("W takim razie obstaw inną kwotę!   [WCIŚNIJ ENTER]")
                 # TODO, muszisz (dla samego siebie) starać się jak najlepiej nazywać zmienne - DONE
                 player_bet = player.bet_money()
-                bet_acceptance = player.checker(player_bet)
+                bet_acceptance = player.checker(player_bet, double_down)
             if bet_acceptance == "t":
                 exchange = player.exchange_choice(bet_acceptance)
                 player.exchange(exchange[0], exchange[1])
                 input("GOTOWE!   [WCIŚNIJ ENTER]")
                 player.show_my_chips()
-                bet_acceptance = player.checker(player_bet)
+                bet_acceptance = player.checker(player_bet, double_down)
 
         bet_chips_list = player.bet(player_bet)
         input(f"KWOTA OBSTAWIONA!. POZOSTAŁO CI {player.money} zł.   [WCIŚNIJ ENTER]")
@@ -95,6 +96,7 @@ while start:
         croupier_round = 0
         player_sum = 0
         croupier_sum = 0
+        double_down_permission = "y"
         next_round = True
         while next_round:
             # Początkowe rozdanie kart
@@ -169,21 +171,29 @@ while start:
 
                     # Double down
                     if player_decision == "3":
-                        print("\n" * 20)
-                        print(f"Zakład powiększony do {player_bet * 2}!")
-                        print("Krupier dodaje trzecią i ostatnią kartę do Twojej ręki.\n")
-                        bet_chips_list = player.bet(player_bet)
-                        player_bet *= 2
-                        card = deck.take_one()
-                        player_cards.append(card)
-                        player_sum += card.value
-                        player.show_cards(player_cards)
-                        print("Karty krupiera to:")
-                        print(f"{croupier_cards[0]}")
-                        print("Druga karta krupiera jest zakryta.")
-                        bet_chips_list *= 2
-                        round_no += 1
-
+                        double_down = 1
+                        double_down_permission = player.checker(player_bet,double_down)
+                        if double_down_permission != "n":
+                            print("\n" * 20)
+                            print(f"Zakład powiększony do {player_bet * 2}!")
+                            print("Krupier dodaje trzecią i ostatnią kartę do Twojej ręki.\n")
+                            bet_chips_list = player.bet(player_bet)
+                            player_bet *= 2
+                            card = deck.take_one()
+                            player_cards.append(card)
+                            player_sum += card.value
+                            player.show_cards(player_cards)
+                            print("Karty krupiera to:")
+                            print(f"{croupier_cards[0]}")
+                            print("Druga karta krupiera jest zakryta.")
+                            bet_chips_list *= 2
+                            round_no += 1
+                        else:
+                            print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
+                            while player_decision not in ['1', '2']:
+                                player_decision = input("1 - Pas \n2 - Dobieram \n")
+                                if player_decision not in ['1', '2']:
+                                    print("Wpisz 1 lub 2")
 
                 # Decyzje w kolejnych rundach
                 elif player_decision != "3":

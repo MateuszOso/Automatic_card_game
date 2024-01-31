@@ -100,7 +100,7 @@ class Hand:
             except ValueError:
                 print("Podaj wartość cyfrą")
 
-    def checker(self, player_bet):
+    def checker(self, player_bet, double_down):
 
         org_player_bet = player_bet
         count = 0
@@ -120,9 +120,14 @@ class Hand:
                                 all_in = "y"
                                 return all_in
                     if token == 1 and player_bet != 1 and player_bet != 0:
-                        print("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić?")
-                        decision_t_n = Game_service.yes_no_answear()
-                        return decision_t_n
+                        if double_down == 0:
+                            print("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić?")
+                            decision_t_n = Game_service.yes_no_answear()
+                            return decision_t_n
+                        if double_down == 1:
+                            print("Nie masz żetonów do podwojenia stawki. Wybierz 1 lub 2.")
+                            double_down_permission = "n"
+                            return double_down_permission
                     break
                 if token == self.bet_check[count]:
                     count += 1
@@ -151,9 +156,14 @@ class Hand:
                         player_bet -= self.bet_check[count]
                         count += 1
                     elif token == 1:
-                        print("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić?")
-                        decision_t_n = Game_service.yes_no_answear()
-                        return decision_t_n
+                        if double_down == 0:
+                            print("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić?")
+                            decision_t_n = Game_service.yes_no_answear()
+                            return decision_t_n
+                        if double_down == 1:
+                            print("Nie masz żetonów do podwojenia stawki. Wybierz 1 lub 2.")
+                            double_down_permission = "n"
+                            return double_down_permission
                     else:
                         break
 
