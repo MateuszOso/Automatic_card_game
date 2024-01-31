@@ -189,21 +189,13 @@ while start:
                             bet_chips_list *= 2
                             round_no += 1
                         else:
-                            print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
-                            while player_decision not in ['1', '2']:
-                                player_decision = input("1 - Pas \n2 - Dobieram \n")
-                                if player_decision not in ['1', '2']:
-                                    print("Wpisz 1 lub 2")
+                            player_decision = Game_service.player_move(player_decision)
 
                 # Decyzje w kolejnych rundach
                 elif player_decision != "3":
-                    print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
                     # TODO, dobra praktyka czyli duże listy, duże zbiory, staramy się procesować jako obiekt, albo drzewo ze względów na preformance - KIND OF
                     # Big O notation (google it)
-                    while player_decision not in ['1', '2']:
-                        player_decision = input("1 - Pas \n2 - Dobieram \n")
-                        if player_decision not in ['1', '2']:
-                            print("Wpisz 1 lub 2")
+                    player_decision = Game_service.player_move(player_decision)
 
                 else:
                     player_decision = "1"

@@ -37,3 +37,14 @@ def next_turn(turn):
     turn += 1
 
     return player_decision, next_round, turn
+
+
+def player_move(player_decision):
+
+    print("Wybierz co chcesz zrobić, przez wybranie 1 lub 2:")
+    while player_decision not in ['1', '2']:
+        player_decision = input("1 - Pas \n2 - Dobieram \n")
+        if player_decision not in ['1', '2']:
+            print("Wpisz 1 lub 2")
+        else:
+            return player_decision
