@@ -129,13 +129,20 @@ class Hand:
                             double_down_permission = "n"
                             return double_down_permission
                     break
-                if token == self.bet_check[count]:
+                if token == self.bet_check[count] or token == player_bet:
                     count += 1
                     player_bet -= token
                 elif token > self.bet_check[count]:
                     while token > total:
                         if count == len(self.bet_check):
-                            break
+                            if double_down == 0:
+                                print("Aby obstawić taką kwotę musisz rozmienić żetony. Rozmienić?")
+                                decision_t_n = Game_service.yes_no_answear()
+                                return decision_t_n
+                            if double_down == 1:
+                                print("Nie masz żetonów do podwojenia stawki. Wybierz 1 lub 2.")
+                                double_down_permission = "n"
+                                return double_down_permission
                         total += self.bet_check[count]
                         count += 1
                     if total > token and count != len(self.bet_check):
